@@ -1,0 +1,869 @@
+{
+    "scoreDatas": [
+        {
+            "curLevelIndex": 0,
+            "levelScoreDatas": [
+                {
+                    "gridType": 0,
+                    "connectCount": 3,
+                    "score": 1
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 4,
+                    "score": 2
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 5,
+                    "score": 4
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 6,
+                    "score": 5
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 7,
+                    "score": 8
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 8,
+                    "score": 10
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 9,
+                    "score": 20
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 10,
+                    "score": 30
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 11,
+                    "score": 50
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 12,
+                    "score": 100
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 13,
+                    "score": 200
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 14,
+                    "score": 400
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 3,
+                    "score": 1
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 4,
+                    "score": 4
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 5,
+                    "score": 5
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 6,
+                    "score": 10
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 7,
+                    "score": 20
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 8,
+                    "score": 30
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 9,
+                    "score": 50
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 10,
+                    "score": 100
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 11,
+                    "score": 250
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 12,
+                    "score": 500
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 13,
+                    "score": 750
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 14,
+                    "score": 800
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 3,
+                    "score": 1
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 4,
+                    "score": 5
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 5,
+                    "score": 10
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 6,
+                    "score": 20
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 7,
+                    "score": 40
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 8,
+                    "score": 80
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 9,
+                    "score": 160
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 10,
+                    "score": 500
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 11,
+                    "score": 1000
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 12,
+                    "score": 2000
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 13,
+                    "score": 5000
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 14,
+                    "score": 6000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 3,
+                    "score": 1
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 4,
+                    "score": 10
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 5,
+                    "score": 30
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 6,
+                    "score": 50
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 7,
+                    "score": 60
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 8,
+                    "score": 100
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 9,
+                    "score": 750
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 10,
+                    "score": 1000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 11,
+                    "score": 10000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 12,
+                    "score": 20000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 13,
+                    "score": 50000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 14,
+                    "score": 60000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 3,
+                    "score": 1
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 4,
+                    "score": 20
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 5,
+                    "score": 50
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 6,
+                    "score": 100
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 7,
+                    "score": 500
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 8,
+                    "score": 1000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 9,
+                    "score": 2000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 10,
+                    "score": 5000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 11,
+                    "score": 20000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 12,
+                    "score": 50000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 13,
+                    "score": 60000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 14,
+                    "score": 80000
+                }
+            ]
+        },
+        {
+            "curLevelIndex": 1,
+            "levelScoreDatas": [
+                {
+                    "gridType": 0,
+                    "connectCount": 5,
+                    "score": 2
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 6,
+                    "score": 4
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 7,
+                    "score": 5
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 8,
+                    "score": 8
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 9,
+                    "score": 10
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 10,
+                    "score": 20
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 11,
+                    "score": 30
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 12,
+                    "score": 50
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 13,
+                    "score": 100
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 14,
+                    "score": 200
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 15,
+                    "score": 450
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 5,
+                    "score": 4
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 6,
+                    "score": 5
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 7,
+                    "score": 10
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 8,
+                    "score": 20
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 9,
+                    "score": 30
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 10,
+                    "score": 50
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 11,
+                    "score": 100
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 12,
+                    "score": 250
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 13,
+                    "score": 500
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 14,
+                    "score": 750
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 15,
+                    "score": 1000
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 5,
+                    "score": 5
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 6,
+                    "score": 10
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 7,
+                    "score": 20
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 8,
+                    "score": 40
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 9,
+                    "score": 80
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 10,
+                    "score": 160
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 11,
+                    "score": 500
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 12,
+                    "score": 1000
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 13,
+                    "score": 2000
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 14,
+                    "score": 5000
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 15,
+                    "score": 7000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 5,
+                    "score": 10
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 6,
+                    "score": 30
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 7,
+                    "score": 50
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 8,
+                    "score": 60
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 9,
+                    "score": 100
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 10,
+                    "score": 750
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 11,
+                    "score": 1000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 12,
+                    "score": 10000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 13,
+                    "score": 20000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 14,
+                    "score": 50000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 15,
+                    "score": 70000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 5,
+                    "score": 20
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 6,
+                    "score": 50
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 7,
+                    "score": 100
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 8,
+                    "score": 500
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 9,
+                    "score": 1000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 10,
+                    "score": 2000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 11,
+                    "score": 5000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 12,
+                    "score": 20000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 13,
+                    "score": 50000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 14,
+                    "score": 80000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 15,
+                    "score": 100000
+                }
+            ]
+        },
+        {
+            "curLevelIndex": 2,
+            "levelScoreDatas": [
+                {
+                    "gridType": 0,
+                    "connectCount": 6,
+                    "score": 2
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 7,
+                    "score": 4
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 8,
+                    "score": 5
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 9,
+                    "score": 8
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 10,
+                    "score": 10
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 11,
+                    "score": 20
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 12,
+                    "score": 30
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 13,
+                    "score": 50
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 14,
+                    "score": 100
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 15,
+                    "score": 200
+                },
+                {
+                    "gridType": 0,
+                    "connectCount": 16,
+                    "score": 500
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 6,
+                    "score": 4
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 7,
+                    "score": 5
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 8,
+                    "score": 10
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 9,
+                    "score": 20
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 10,
+                    "score": 30
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 11,
+                    "score": 50
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 12,
+                    "score": 100
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 13,
+                    "score": 250
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 14,
+                    "score": 500
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 15,
+                    "score": 750
+                },
+                {
+                    "gridType": 1,
+                    "connectCount": 16,
+                    "score": 1200
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 6,
+                    "score": 5
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 7,
+                    "score": 10
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 8,
+                    "score": 20
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 9,
+                    "score": 40
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 10,
+                    "score": 80
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 11,
+                    "score": 160
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 12,
+                    "score": 500
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 13,
+                    "score": 1000
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 14,
+                    "score": 2000
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 15,
+                    "score": 5000
+                },
+                {
+                    "gridType": 2,
+                    "connectCount": 16,
+                    "score": 8000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 6,
+                    "score": 10
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 7,
+                    "score": 30
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 8,
+                    "score": 50
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 9,
+                    "score": 60
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 10,
+                    "score": 100
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 11,
+                    "score": 750
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 12,
+                    "score": 1000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 13,
+                    "score": 10000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 14,
+                    "score": 20000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 15,
+                    "score": 50000
+                },
+                {
+                    "gridType": 3,
+                    "connectCount": 16,
+                    "score": 80000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 6,
+                    "score": 20
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 7,
+                    "score": 50
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 8,
+                    "score": 100
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 9,
+                    "score": 500
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 10,
+                    "score": 1000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 11,
+                    "score": 2000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 12,
+                    "score": 5000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 13,
+                    "score": 20000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 14,
+                    "score": 50000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 15,
+                    "score": 100000
+                },
+                {
+                    "gridType": 4,
+                    "connectCount": 16,
+                    "score": 100000
+                }
+            ]
+        }
+    ]
+}

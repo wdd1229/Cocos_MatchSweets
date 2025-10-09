@@ -1,0 +1,30 @@
+# Cocos Creator 项目上传 GitHub gitignore 模板
+temp/
+build/
+library/
+profiles/
+settings/
+project/Android/
+project/iOS/
+project/Experimental/
+
+# 构建输出目录（抖音小游戏）
+build/
+
+# 资源目录（通常不需要上传）
+assets/temp/
+assets/texturePacker/
+assets/obj/
+assets/anim/
+
+
+
+# Node.js 项目（可选）
+node_modules/
+package-lock.json
+
+# 临时文件
+*.lock
+*.pkl
+*.tmp
+

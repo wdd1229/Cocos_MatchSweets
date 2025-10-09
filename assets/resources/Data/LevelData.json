@@ -1,0 +1,22 @@
+{
+    "levels": [
+        {
+            "levelIndex": 1,
+            "Row": 4,
+            "Column": 4,
+            "wallCount": 20
+        },
+        {
+            "levelIndex": 2,
+            "Row": 5,
+            "Column": 5,
+            "wallCount": 20
+        },
+        {
+            "levelIndex": 3,
+            "Row": 6,
+            "Column": 6,
+            "wallCount": 20
+        }
+    ]
+}
