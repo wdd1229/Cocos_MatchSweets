@@ -18,12 +18,6 @@ export class MainUI extends Component {
     startGame(button: Button) {
         console.log("click startGameBtn ...");
         GameManager.Instance.OpenUI("GameUI");
-
-        const score = JsonManager.Instance.GetScore(0, 5);
-
-        console.log(`测试单例读取数据：score:${score}`)
-
-
     }
 
     update(deltaTime: number) {

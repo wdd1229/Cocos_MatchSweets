@@ -17,28 +17,14 @@ export interface ScoreConfig {
 }
 @ccclass('JsonManager')
 export class JsonManager extends Component {
-    // 单例机制
-    private static _instance: JsonManager = null;
-    public static get Instance(): JsonManager {
-        if (!JsonManager._instance) {
-            console.log("GameManager 单例尚未初始化！");
-
-            return null;
-        }
-        return JsonManager._instance;
-    }
-
-    @property
     private LevelData: LevelConfig[] = null;
+
     private LevelScoreData: ScoreConfig[] = null;
+
+    private isTest: boolean = false;
     onLoad() {
-        JsonManager._instance = this;
         this.loadLevelJson();
         this.loadScoreJson();
-    }
-    start() {
-    }
-    update(deltaTime: number) {
     }
     public loadLevelJson(): void {
         const path = "Data/LevelData";
@@ -51,7 +37,7 @@ export class JsonManager extends Component {
                 console.log(asset.json);
                 this.LevelData = asset.json.levels;
                 //console.log("当前关卡的行列："+asset.json.levels[0].Row);
-                console.log(`加载LevelJson成功：${666}`);
+                console.log(`加载 LevelJson 成功`);
                 //this.LevelData.forEach(level => {
                 //    console.log(`关卡 ${level.levelIndex} 配置：`);
                 //    console.log(`  行数：${level.Row}`);
@@ -65,13 +51,11 @@ export class JsonManager extends Component {
         const path = "Data/ScoreData";
         resources.load(path, JsonAsset, (err: Error, asset: JsonAsset) => {
             if (err) {
-                console.error("加载 LevelJson 失败:", err);
+                console.error("加载 ScoreJson 失败:", err);
                 return;
             }
             if (asset) {
-                console.log(asset.json);
-                console.log("当前关卡和对应分数：" + asset.json.scoreDatas[0].curLevelIndex);
-
+                console.log("加载 ScoreJson 成功")
                 this.LevelScoreData = asset.json.scoreDatas;
                 //this.LevelScoreData.forEach(level => {
                 //    console.log(`关卡 ${level.curLevelIndex} 的得分规则是：`);
@@ -82,23 +66,25 @@ export class JsonManager extends Component {
             }
         });
     }
-    // 根据关卡编号返回配置
-    public GetLevelConfig(levelIndex: number): LevelConfig | null {
+    /// 根据关卡编号返回配置
+    public GetLevelConfig(levelIndex: number): LevelConfig  {
+        if (this.LevelScoreData == null) {
+            console.log("LevelData数据为空 请检查Json数据");
+            return;
+        }
         return this.LevelData.find(level => level.levelIndex === levelIndex) || null;
     }
 
     public GetScore(gridType: number, connectCount: number): number {
-
-        console.log("JsonLoader ---- GetScore");
         if (this.LevelScoreData == null) {
             console.log("LevelScoreData数据为空 请检查Json数据");
             return;
         }
         const levelConfig = this.LevelScoreData.find(level => level.curLevelIndex === 0); // 当前选择的是第 0 个关卡
         if (!levelConfig) return null;
-
         const data = levelConfig.levelScoreDatas.find(item => item.gridType === gridType && item.connectCount === connectCount);
         return data ? data.score : null;
     }
 }
-
+
+

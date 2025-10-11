@@ -1,5 +1,10 @@
-﻿import { _decorator, Component, Node } from 'cc';
+﻿import { _decorator, Component, Node ,find} from 'cc';
+import { JsonManager, LevelConfig } from './JsonManager';
+import { PrefabManager } from './PrefabManager';
+import { GridManager } from './GridManager';
 const { ccclass, property } = _decorator;
+
+
 
 @ccclass('GameManager')
 export default class GameManager extends Component {
@@ -17,20 +22,35 @@ export default class GameManager extends Component {
         // 初始化逻辑
         console.log("GameManager 已初始化");
     }
-    @property
+    private curLevelIndex:number = 1;
+
     private LoadingUI: Node = null;
-    @property
+
     private MainUI: Node = null;
-    @property
+
     private GameUI: Node = null;
+
+    @property
+    private prefabManager: PrefabManager = null;
+    @property
+    private gridManager: GridManager = null;
+    @property
+    private jsonManager: JsonManager = null;
+
+    private Canvas: Node = null;
 
     //private curLevelConfig: JsonLoader.Instance.LevelConfig = null;
     onLoad() {
         GameManager._instance = this;
         console.log("GameManager -- onLoad");
-        this.LoadingUI = this.node.getChildByName("LoadingUI");
-        this.MainUI = this.node.getChildByName("MainUI");
-        this.GameUI = this.node.getChildByName("GameUI");
+        this.Canvas = find("Canvas");
+        this.LoadingUI = this.Canvas.getChildByName("LoadingUI");
+        this.MainUI = this.Canvas.getChildByName("MainUI");
+        this.GameUI = this.Canvas.getChildByName("GameUI");
+
+        this.prefabManager = this.node.getChildByName("PrefabManager").getComponent(PrefabManager);
+        this.gridManager = this.node.getChildByName("GridManager").getComponent(GridManager);
+        this.jsonManager = this.node.getChildByName("JsonManager").getComponent(JsonManager);
     }
 
     start() {
@@ -70,17 +90,33 @@ export default class GameManager extends Component {
             case "GameUI":
                 this.LoadingUI.active = false;
                 this.MainUI.active = false;
-                this.GameUI.active = true;
+                 this.GameUI.active = true;
+                 this.StartGame();
                 break;
         }
     }
 
+    StartGame() {
+        this.gridManager.inIt();
+        this.gridManager.CreatGrid();
+    }
 
     update(deltaTime: number): void {
         // 每帧更新逻辑，例如管理游戏状态
     }
 
-    
+    public getCurLevelIndex(): number {
+        return this.curLevelIndex;
+    }
+
+    public getCurLevelConfig(): LevelConfig {
+        console.error("GameManager--getCurLevelConfig:" + this.curLevelIndex);
+        return this.jsonManager.GetLevelConfig(this.curLevelIndex);
+    }
+
+    public getGridPrefab(gridType: GridType): Node {
+        return this.prefabManager.getGridPrefab(gridType);
+    }
 }
 
 
