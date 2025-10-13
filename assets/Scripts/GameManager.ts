@@ -2,6 +2,7 @@
 import { JsonManager, LevelConfig } from './JsonManager';
 import { PrefabManager } from './PrefabManager';
 import { GridManager } from './GridManager';
+import { GridType } from './GridType';
 const { ccclass, property } = _decorator;
 
 

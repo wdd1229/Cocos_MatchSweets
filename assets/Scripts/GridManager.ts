@@ -53,7 +53,7 @@ export class GridManager extends Component {
 
     public startGame() {
         this.spawnGridsAsync().then(() => {
-            this.checkForConnectGrid();
+            this.cleatAllConnectGrids(this.checkForConnectGrids());
         });
     }
 
@@ -73,13 +73,11 @@ export class GridManager extends Component {
         //console.error("当前随机gridType:" + gridType);
         const node = GameManager.Instance.getGridPrefab(gridType);
         node.name = index.toString();
-        console.error(Math.floor(index / this.levelConfig.Column) == this.levelConfig.Column);
         //最上面的一层不检测
         const tile = node.getComponent(Tile);
         tile.index = index;
         if (!(Math.floor(index / this.levelConfig.Column) == this.levelConfig.Column))
             this.gridNodes.push(tile);
-        console.error("格子生成后添加到this.gridNodes" + this.gridNodes.length);
         const gridTrans = node.getComponent(UITransform)
         gridTrans.setContentSize(this.cellSize, this.cellSize);
         const targetPos = this.getScreenPosByIndex(index)
@@ -124,7 +122,7 @@ export class GridManager extends Component {
         }
     }
     private visited: boolean[] = [];
-    checkForConnectGrid() {
+    checkForConnectGrids() {
         const groups: Array<Array<Tile>> = [];
 
         // 初始化 visited 数组
@@ -141,12 +139,14 @@ export class GridManager extends Component {
                 const regions: Array<Tile> = []; 
                 const count = this.checkGridDFS(xIndex, yIndex, this.gridNodes[i].gridType, regions);
 
-                if (count >= 3) {
+                if (count >= 3 && this.isLinear(regions)) {
                     groups.push(regions);
                     console.error("*******************");
                     for (let k = 0; k < regions.length; k++) {
                         const tile: Tile = regions[k];
                         console.error(tile.name);
+
+                        tile.getComponent(Animation).play("effectHideAni");
                     }   
                     console.error("*******************");
                 }
@@ -162,7 +162,7 @@ export class GridManager extends Component {
         //}
     }
 
-    isLinear(regions:Tile[]):boolean {
+    isLinear(regions: Array<Tile>):boolean {
         if (regions.length < 3) return false;
         // 统计各行和列的数量
         const rowCounts: Map<number, number> = new Map();
@@ -208,6 +208,39 @@ export class GridManager extends Component {
         count += this.checkGridDFS(row, col - 1, gridType, regions); // 左
         count += this.checkGridDFS(row, col + 1, gridType, regions); // 右
         return count;
+    }
+
+    cleatAllConnectGrids(matchGrids: Array<Array<Tile>>) {
+        for (let tileArray of matchGrids) {
+            for (let tile of tileArray) {
+                // 操作tile
+                //console.log(tile.index);
+            }
+        }
+        let specialScore = 0;
+        let normalScore = 0;
+        for (let tileArray of matchGrids) {
+            if (tileArray == null || tileArray.length == 0)
+                continue;
+            for (let tile of tileArray) {
+                // 操作tile
+                //console.log(tile.index);
+                if (tile == null) continue;
+
+                if (tile.gridType == GridType.SpecialCollection) {
+                    specialScore++;
+
+                    console.error(`当前收集品数量为：${specialScore}`);
+
+                }
+
+                this.gridNodes[tile.index] = null;
+
+            }
+            normalScore += 5;//暂时定位每次消除分数都是5
+        }
+
+        console.error("当前消除分数为：" + normalScore);
     }
 }
 
