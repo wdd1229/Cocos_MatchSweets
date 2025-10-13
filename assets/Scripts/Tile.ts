@@ -4,16 +4,16 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Tile')
 export class Tile extends Component {
-    private gridType: GridType = null;
+    public gridType: number = null;
     private gridManager: GridManager = null;
     private curAnim: Animation = null;
-    inIt(key: number, gridType: GridType,gridManager:any) {
+    public index: number = -1;
+    inIt(key: number, gridType: number,gridManager:any) {
         this.gridType = gridType;
         this.gridManager = gridManager;
         this.curAnim = this.node.getComponent(Animation);
-        console.error(gridType);
+        //console.error(this.gridType.toString());
         this.curAnim.play(this.gridType.toString());
-
         //this.playMove2Index(key);
     }
    

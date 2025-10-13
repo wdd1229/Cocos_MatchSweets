@@ -2,6 +2,7 @@
 import { JsonManager, LevelConfig } from './JsonManager';
 import GameManager from './GameManager';
 import { Tile } from './Tile';
+import { GridType } from './GridType';
 const { ccclass, property } = _decorator;
 
 @ccclass('GridManager')
@@ -20,19 +21,17 @@ export class GridManager extends Component {
     private gridRoot: Node = null;
 
     private gridContent: Node = null;
+    private canvasContentSize = null;
+    @property
+    private gridNodes: Tile[] = [];
+
+    private delayBeforeFall: number = 0.2;
+    private fallDuration: number = 0.5;
     onLoad() {
         this.canvas = find("Canvas");
-        /*        this.origin = find("Canvas/GridRoot").position;*/
         this.gridContent = find("Canvas/GameUI/gridContent");
         this.gridRoot = this.gridContent.getChildByName("gridRoot");
     }
-    start() {
-        const tt = this.canvas.getComponent(UITransform).contentSize;
-        //this.width = tt.x / (this.cellSize+this.space);
-        //this.height = tt.y / (this.cellSize + this.space);
-
-    }
-
     inIt() {
         this.levelConfig = GameManager.Instance.getCurLevelConfig();
         console.error("this.levelConfig.Column:" + this.levelConfig.Column);
@@ -43,195 +42,71 @@ export class GridManager extends Component {
         console.error("网格宽度"+this.width);
         console.error("网格高度" + this.height);
 
-        this.gridContent.getComponent(UITransform).setContentSize(this.width, this.height);
+        this.gridContent.getComponent(UITransform).setContentSize(this.width, this.canvas.getComponent(UITransform).contentSize.y);
         this.gridRoot.getComponent(UITransform).setContentSize(this.width, this.height);
 
         this.gridContent.position = new Vec3(0 - this.width / 2, this.gridContent.position.y,0);
+        this.canvasContentSize = this.canvas.getComponent(UITransform).contentSize
 
-        //const canvasSize = this.canvas.getComponent(UITransform).contentSize;
-        //const xPos = (canvasSize.width - this.width) / 2;
-        //const yPos = (canvasSize.height - this.height)-this.space;
-
-        //this.gridRoot.setPosition(new Vec3(xPos, yPos));
-
-
-        ////设置偏移点为左下角（0,0）
-        //const gridTrans = this.gridRoot.getComponent(UITransform)
-        //gridTrans.setAnchorPoint(0, 0);
-        //gridTrans.setContentSize(0, 0);
-
-        //this.gridRoot.setPosition(0, 0);
-
-        this.totalTiles = this.levelConfig.Row * this.levelConfig.Column;
-    }
-
-    update(deltaTime: number) {
         
     }
-    private totalTiles: number;
-    private currentTileIndex: number = 0;
-    private gridNodes: Node[] = [];
-    spawnGridsWithDelay() {
-        this.createTileAtTopTest()
-            .then(() => {
-                // 等待动画完成后再生成下一个格子（用于下落完再生成下一个）
-                if (this.currentTileIndex < this.totalTiles) {
-                    this.currentTileIndex++;
-                    this.spawnGridsWithDelay();
-                }
-            });
-    }
 
-    async createTileAtTopTest() {
-        const gridType = this.getRandomGridType(false);
-        //console.error("当前随机gridType:" + gridType);
-        const node = GameManager.Instance.getGridPrefab(gridType);
-        const tile = node.getComponent(Tile);
-        
-        const gridTrans = node.getComponent(UITransform)
-        //gridTrans.setAnchorPoint(0, 0);
-        gridTrans.setContentSize(this.cellSize, this.cellSize);
-
-        const pos = this.getScreenPosByIndex(this.currentTileIndex)
-        
-        const canvasSize = this.canvas.getComponent(UITransform).contentSize;
-        //node.position = new Vec3(pos.x, canvasSize.y - 300, 0);
-        node.position = pos;
-
-        await this.animateToTargetPosition(node, pos);
-    }
-
-
-    async animateToTargetPosition(node: Node, targetPos): Promise<void> {
-        return new Promise<void>(resolve => {
-            // 下落动画
-            tween(node)
-                .by(0.5, { position: targetPos })
-                .call(() => {
-                    const curAnim = node.getComponent(Animation);
-                        curAnim.play("1");
-                    resolve();
-                })
-                .start();
+    public startGame() {
+        this.spawnGridsAsync().then(() => {
+            this.checkForConnectGrid();
         });
     }
 
-
-    private ttt: Node;
-    //async animateToTargetPosition(target: Vec3, node: Node) Promise<void> {
-    //    return new Promise<void>((resolve) => {
-    //        tween(node)
-    //            .by(0.5, { position: easing.circInOut })
-    //            .call(() => {
-    //                resolve();
-    //            })
-    //            .start();
-    //    })
-    //}
-
-    //CreatGridTest() {
-        
-    //}
-
-    ///创建格子
-    public async CreatGrid() {
-        this.spawnGridsWithDelay();
-        this.width = this.levelConfig.Column * this.cellSize + (this.levelConfig.Column - 1) * this.space;
-        this.height = this.levelConfig.Row * this.cellSize + (this.levelConfig.Row - 1) * this.space;
-
-        const canvasSize = this.canvas.getComponent(UITransform).contentSize;
-
-        const xPos = (canvasSize.width - this.width) / 2
-        const curY = this.gridRoot.position.y;
-        return;
-
-        //console.log("this.levelConfig.Column:" + this.levelConfig.Column);
-        //console.log("this.levelConfig.Row:" + this.levelConfig.Row);
-        //const x = Math.floor(Math.random() * this.levelConfig.Column);
-        //const y = Math.floor(Math.random() * this.levelConfig.Row);
-
-        //for (var i = 0; i < this.levelConfig.Column+1; i++) {
-        //    for (var j = 0; j < this.levelConfig.Row; j++) {
-        //        let key = j + i * this.levelConfig.Column;
-        //        if (x == i && y == j) {
-        //            this.createGridAtTop(i, j, this.levelConfig.Column, true);
-        //        } else {
-        //            this.createGridAtTop(i, j,this.levelConfig.Column);
-        //        }
-        //    }
-        //}
-        //this.StartCheck();
-        //this.width = this.levelConfig.Column * this.cellSize + (this.levelConfig.Column - 1) * this.space;
-        //this.height = this.levelConfig.Row * this.cellSize + (this.levelConfig.Row - 1) * this.space;
-
-        //const canvasSize = this.canvas.getComponent(UITransform).contentSize;
-
-        //const xPos = (canvasSize.width - this.width) / 2
-        //const curY = this.gridRoot.position.y;
+    public async spawnGridsAsync() {
+        const x = Math.floor(Math.random() * this.levelConfig.Column);
+        const y = Math.floor(Math.random() * this.levelConfig.Row);
+        for (var i = 0; i < this.levelConfig.Column+1; i++) {
+            for (var j = 0; j < this.levelConfig.Row; j++) {
+                const index = i * this.levelConfig.Row + j
+                await this.spawnGridAtPositionAsync(index,i==x&&j==y);
+            }
+        }
     }
 
-
-    //getRandomGridType(isSpecial: boolean): GridType {
-
-    //    if (isSpecial) {
-    //        return 15 as GridType;
-    //    } else {
-    //        return Math.floor(Math.random() * 15) as GridType;
-    //    }
-
-    //    //if (isSpecial) {
-    //    //    return GridType.SpecialCollection; // 使用枚举的字符串值
-    //    //} else {
-    //    //    const randomIndex = Math.floor(Math.random() * Object.keys(GridType).length);
-    //    //    return GridType[Object.keys(GridType)[randomIndex]] as GridType;
-    //    //}
-    //}
-
-    //private playGridAnimation(node: Node, targetY): Promise<void> {
-    //    return new Promise(resolve => {
-    //        //const targetY = node.position.y - 500; // 回到对应目标位置
-    //        const targetPosition =new Vec3(node.position.x, targetY);
-    //        // 下落动画
-    //        tween(node)
-    //            .by(0.5, { position: targetPosition })
-    //            .call(() => {
-    //                const curAnim = node.getComponent(Animation);
-    //                    curAnim.play("1");
-    //                resolve();
-    //            })
-    //            .start();
-    //    });
-    //}
-
-    createGridAtTop(x:number,y:number,fallDistance:number,isSpecial?:boolean):Node {
-        const gridType = this.getRandomGridType(isSpecial);
+    private async spawnGridAtPositionAsync(index: number,isSpeacial:boolean) {
+        const gridType = this.getRandomGridType(isSpeacial);
         //console.error("当前随机gridType:" + gridType);
-        const grid = GameManager.Instance.getGridPrefab(gridType);
-        const tile = grid.getComponent(Tile);
-        let key = y + x * this.levelConfig.Column;
-        const gridTrans=grid.getComponent(UITransform)
-        //gridTrans.setAnchorPoint(0, 0);
+        const node = GameManager.Instance.getGridPrefab(gridType);
+        node.name = index.toString();
+        console.error(Math.floor(index / this.levelConfig.Column) == this.levelConfig.Column);
+        //最上面的一层不检测
+        const tile = node.getComponent(Tile);
+        tile.index = index;
+        if (!(Math.floor(index / this.levelConfig.Column) == this.levelConfig.Column))
+            this.gridNodes.push(tile);
+        console.error("格子生成后添加到this.gridNodes" + this.gridNodes.length);
+        const gridTrans = node.getComponent(UITransform)
         gridTrans.setContentSize(this.cellSize, this.cellSize);
-
-        const pos = this.getScreenPosByIndex(key)
-        if (x == this.levelConfig.Column) {
-            const canvasSize = this.canvas.getComponent(UITransform).contentSize;
-            grid.position = new Vec3(pos.x, canvasSize.y-300,0);
-        } else {
-            const canvasSize = this.canvas.getComponent(UITransform).contentSize;
-            grid.position = new Vec3(pos.x, canvasSize.y - 300, 0);
-            //grid.position = pos;
-        } 
-        //Tile初始化
-        tile.inIt(key,gridType,this);
-        //下落逻辑
-
-        return grid;
+        const targetPos = this.getScreenPosByIndex(index)
+        node.position = new Vec3(targetPos.x, this.canvasContentSize.y - 300, 0);
+        tile.inIt(index, gridType, this);
+        //等待顶部停留时间
+        await new Promise<void>(resolve => {
+            setTimeout(() => {
+                resolve();
+            }, this.delayBeforeFall * 1000); // 转换为毫秒
+        });
+        // 下落动画
+        tween(node)
+            .to(this.fallDuration, { position: targetPos })
+            .call(() => {
+                //this.playSpecialAnim(index);
+            })
+            .start();
     }
 
     getScreenPosByIndex(index: any) {
         let pos: any = this.getPosByIndex(index);
-        return new Vec3((pos.x + 1 / 2) * this.cellSize+pos.x*this.space, (pos.y + 1 / 2) * this.cellSize+pos.y*this.space, 0);
+        if (pos.y == this.levelConfig.Column) {
+            return new Vec3((pos.x + 1 / 2) * this.cellSize + pos.x * this.space, this.canvasContentSize.y - 300, 0);
+        } else {
+            return new Vec3((pos.x + 1 / 2) * this.cellSize+pos.x*this.space, (pos.y + 1 / 2) * this.cellSize+pos.y*this.space, 0);
+        }
     }
 
     getPosByIndex(index: any) {
@@ -239,39 +114,100 @@ export class GridManager extends Component {
     }
 
 
-    getRandomGridType(isSpecial: boolean): GridType {
-
+    getRandomGridType(isSpecial: boolean): number {
+       // console.error(typeof (GridType.BaiYu));
+       //return GridType.BaiYu;
         if (isSpecial) {
-            return 15 as GridType;
+            return GridType.SpecialCollection;
         } else {
-            return Math.floor(Math.random() * 15) as GridType;
+            return Math.floor(Math.random() * 2)+1;
         }
-        
-        //if (isSpecial) {
-        //    return GridType.SpecialCollection; // 使用枚举的字符串值
-        //} else {
-        //    const randomIndex = Math.floor(Math.random() * Object.keys(GridType).length);
-        //    return GridType[Object.keys(GridType)[randomIndex]] as GridType;
+    }
+    private visited: boolean[] = [];
+    checkForConnectGrid() {
+        const groups: Array<Array<Tile>> = [];
+
+        // 初始化 visited 数组
+        this.visited = new Array<boolean>(this.levelConfig.Column * this.levelConfig.Row);
+
+        for (let i = 0; i < this.levelConfig.Column * this.levelConfig.Row; i++) {
+            this.visited[i] = false;
+        }
+
+        for (var i = 0; i < this.gridNodes.length; i++) {
+            const xIndex = i % this.levelConfig.Column;
+            const yIndex = Math.floor(i / this.levelConfig.Row);
+            if (this.gridNodes[i] != null && !this.visited[i]) {
+                const regions: Array<Tile> = []; 
+                const count = this.checkGridDFS(xIndex, yIndex, this.gridNodes[i].gridType, regions);
+
+                if (count >= 3) {
+                    groups.push(regions);
+                    console.error("*******************");
+                    for (let k = 0; k < regions.length; k++) {
+                        const tile: Tile = regions[k];
+                        console.error(tile.name);
+                    }   
+                    console.error("*******************");
+                }
+            }
+        }
+
+        return groups;
+
+        //for (var i = 0; i < this.levelConfig.Column; i++) {
+        //    for (var j = 0; j < this.levelConfig.Row; j++) {
+                
+        //    }
         //}
     }
 
-    StartCheck() {
-
+    isLinear(regions:Tile[]):boolean {
+        if (regions.length < 3) return false;
+        // 统计各行和列的数量
+        const rowCounts: Map<number, number> = new Map();
+        const colCounts: Map<number, number> = new Map();
+        for (const tile of regions) {
+            const row = Math.floor(tile.index / this.levelConfig.Column);
+            const col = tile.index % this.levelConfig.Column;
+            // 更新行和列的数量
+            if (!rowCounts.has(row)) rowCounts.set(row, 0);
+            rowCounts.set(row, rowCounts.get(row)! + 1);
+            if (!colCounts.has(col)) colCounts.set(col, 0);
+            colCounts.set(col, colCounts.get(col)! + 1);
+        }
+        // 检查行
+        for (const [r, count] of rowCounts.entries()) {
+            if (count >= 3) return true;
+        }
+        // 检查列
+        for (const [c, count] of colCounts.entries()) {
+            if (count >= 3) return true;
+        }
+        return false;
     }
 
-    //CalculateGridPos(xIndex:number,yIndex:number):Vec2 {
-    //    const startX = (this.width - this.levelConfig.Row) / 2;
-    //    if (yIndex == this.levelConfig.Column) {
-    //        yIndex = this.height - 3;
-    //    }
-
-    //    return this.GridToWorld(new Vec2(xIndex + startX, yIndex));
-    //}
-
-    //GridToWorld(gridPos):Vec2 {
-    //    return new Vec2(gridPos.x * this.cellSize + this.origin.x + this.cellSize / 2 + gridPos.x * 20,
-    //        gridPos.y * this.cellSize + this.origin.y + this.cellSize / 2 + gridPos.y * 20
-    //        )
-    //}
+    checkGridDFS(row: number, col: number, gridType, regions: Array<Tile>):number {
+        //检查边界是否越界 ，是否访问过，和类型判断
+        const index = row * this.levelConfig.Row + col;
+        if (
+            row < 0 || row >= this.levelConfig.Row ||
+            col < 0 || col >= this.levelConfig.Column ||
+            this.gridNodes[index] == null ||
+            this.visited[index] ||
+            this.gridNodes[index].gridType != gridType
+        ) {
+            return 0;
+        }
+        this.visited[index] = true;
+        regions.push(this.gridNodes[index]);
+        //像四个方向遍历
+        let count = 1;
+        count += this.checkGridDFS(row - 1, col, gridType, regions); // 上
+        count += this.checkGridDFS(row + 1, col, gridType, regions); // 下
+        count += this.checkGridDFS(row, col - 1, gridType, regions); // 左
+        count += this.checkGridDFS(row, col + 1, gridType, regions); // 右
+        return count;
+    }
 }
 

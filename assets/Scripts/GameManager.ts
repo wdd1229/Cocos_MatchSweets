@@ -98,7 +98,8 @@ export default class GameManager extends Component {
 
     StartGame() {
         this.gridManager.inIt();
-        this.gridManager.CreatGrid();
+        this.gridManager.startGame();
+        //this.gridManager.spawnGridsAsync();
     }
 
     update(deltaTime: number): void {

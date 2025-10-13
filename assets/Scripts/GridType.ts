@@ -1,4 +1,4 @@
-﻿enum GridType {
+﻿export enum GridType {
     SpecialCollection,//="SpecialCollection",//特殊收集品
     BaiYu ,//="BaiYu",//白玉
     BiYu, //="BiYu",//碧玉
