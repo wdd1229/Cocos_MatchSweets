@@ -116,8 +116,16 @@ export default class GameManager extends Component {
         return this.jsonManager.GetLevelConfig(this.curLevelIndex);
     }
 
+    public getScoreForConnetGridsAndGridType(gridType:GridType,connectGrids) {
+        return this.jsonManager.GetScore(gridType, connectGrids);
+    }
+
     public getGridPrefab(gridType: GridType): Node {
         return this.prefabManager.getGridPrefab(gridType);
+    }
+
+    public releaseGridPrefab(node:Node) {
+        this.prefabManager.releaseGridPrefab(node);
     }
 }
 

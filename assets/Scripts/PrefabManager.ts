@@ -1,4 +1,5 @@
 ﻿import { _decorator, Component,find, game, instantiate, Node, Prefab, resources, Animation } from 'cc';
+import { GridType } from './GridType';
 const { ccclass, property } = _decorator;
 
 @ccclass('PrefabManager')
@@ -9,6 +10,10 @@ export class PrefabManager extends Component {
     private curGrid: Node = null;
     @property
     private gridRoot: Node = null;
+
+    //初始化对象池
+    private gridPool: Node[] = [];
+    private maxPoolSize = 42;//根据需要调整预加载的格子
     onLoad() {
         this.LoadGridPrefab();
 
@@ -17,40 +22,53 @@ export class PrefabManager extends Component {
 
     LoadGridPrefab() {
         resources.load("GridPrefab/grid", Prefab, (err, prefab) => {
-            console.log("加载grid成功*********");
+            if (err || !prefab) {
+                console.error("加载 Grid 预制失败!", err);
+                return;
+            }
             this.gridPrefab = prefab;
-
-            //const xPos = -700;
-            //const yPos = 0;
-            //for (var i = 1; i < 4; i++) {
-            //    for (var j = 1; j < 6; j++) {
-            //        this.curGrid = instantiate(prefab);
-            //        this.node.addChild(this.curGrid);
-            //        this.curGrid.setPosition(xPos+j * 200, yPos+i*200);
-            //        const curAnim = this.curGrid.getComponent(Animation);
-            //        console.log(i.toString() + j.toString());
-            //        curAnim.play(i.toString()+"-"+j.toString());
-            //    }
-            //}
+            console.log("加载grid成功*********");
+            this.initializePool();
         })
+    }
+
+    private initializePool() {
+        for (let i = 0; i < this.maxPoolSize; i++) {
+            const node = instantiate(this.gridPrefab);
+            node.parent = this.gridRoot;
+            node.active = false;
+            this.gridPool.push(node);
+        }
     }
 
     public getGridPrefab(gridType:GridType): Node {
         if (!this.gridPrefab) {
-            console.log(`请检查Grid 当前预制为空`);
+            console.error("Grid Prefab 未加载，请检查！");
             return null;
+        } 
+        //else {
+        //    this.curGrid = instantiate(this.gridPrefab);
+        //    this.gridRoot.addChild(this.curGrid);
+        //    return this.curGrid;
+        //}
+        //从对象池取一个空闲 node
+        const node = this.gridPool.pop();
+        if (node) {
+            console.error("从对象池取一个空闲 node");
+            node.active = true;
+            return node;
         } else {
-            this.curGrid = instantiate(this.gridPrefab);
-            this.gridRoot.addChild(this.curGrid);
-            //if (gridType === GridType.SpecialCollection) {
-            //    return this.curGrid;
-            //} else {
-            //    const curAnim = this.curGrid.getComponent(Animation);
-            //    curAnim.play(gridType.toString());
-            //    return this.curGrid;
-            //}
-            return this.curGrid;
+            //创建一个新 node
+            const node = instantiate(this.gridPrefab);
+            node.active = true;
+            return node;
         }
+    }
+
+    public releaseGridPrefab(node: Node) {
+        if (!node) return;
+            node.active = false;
+        this.gridPool.push(node);
     }
 
     start() {
