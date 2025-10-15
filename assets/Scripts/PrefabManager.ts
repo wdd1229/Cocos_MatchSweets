@@ -54,13 +54,16 @@ export class PrefabManager extends Component {
         //从对象池取一个空闲 node
         const node = this.gridPool.pop();
         if (node) {
-            console.error("从对象池取一个空闲 node");
+            //console.error("从对象池取一个空闲 node");
             node.active = true;
+            node.getComponent(Animation).play(gridType.toString());
+            //console.error(this.gridType.toString());
             return node;
         } else {
             //创建一个新 node
             const node = instantiate(this.gridPrefab);
             node.active = true;
+            node.getComponent(Animation).play(gridType.toString());
             return node;
         }
     }

@@ -28,3 +28,16 @@ package-lock.json
 *.pkl
 *.tmp
 
+/.creator/asset-template/typescript/Custom Script Template Help Documentation.url
+/.vs/Cocos_MatchSweets/FileContentIndex/26124ea3-22a2-4696-8868-e0a4e92aee82.vsidx
+/.vs/Cocos_MatchSweets/FileContentIndex/3b79cf3a-a02d-4981-94a9-39b7b7f097a9.vsidx
+/.vs/Cocos_MatchSweets/FileContentIndex/41fb4bce-739b-46b9-8a8b-b7844ea3043e.vsidx
+/.vs/Cocos_MatchSweets/FileContentIndex/78638c00-28c1-406d-9553-d49b358dbcde.vsidx
+/.vs/Cocos_MatchSweets/FileContentIndex/c35aad79-13b1-429a-a0f1-3d4b38b2bdf8.vsidx
+/.vs/Cocos_MatchSweets/v17/.wsuo
+/.vs/Cocos_MatchSweets/v17/DocumentLayout.backup.json
+/.vs/Cocos_MatchSweets/v17/DocumentLayout.json
+/.vs/Cocos_MatchSweets/v17/workspaceFileList.bin
+/.vs/ProjectSettings.json
+/.vs/VSWorkspaceState.json
+/.vs/slnx.sqlite

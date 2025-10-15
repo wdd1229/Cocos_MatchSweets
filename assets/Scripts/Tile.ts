@@ -1,4 +1,4 @@
-﻿import { _decorator, Component, Animation,Node, TweenSystem, tween, Vec3 } from 'cc';
+﻿import { _decorator, Component, Animation,Node, TweenSystem, tween, Vec3, easing, AnimationState } from 'cc';
 import { GridManager } from './GridManager';
 const { ccclass, property } = _decorator;
 
@@ -18,15 +18,27 @@ export class Tile extends Component {
         this._row = row;
         this._col = col;
         this.curAnim = this.node.getComponent(Animation);
+        this.curAnim.on(Animation.EventType.FINISHED, this.onAnimationFinished, this);
         //console.error(this.gridType.toString());
-        this.curAnim.play(this.gridType.toString());
+        //this.curAnim.play(this.gridType.toString());
         //this.playMove2Index(key);
 
         this._isRemoved = false;
     }
 
+    onAnimationFinished(type: Animation.EventType, state: AnimationState) {
+        if (state.name == "effectHideAni") {
+            this.setRemoved(true);
+            this.gridManager.releaseTile(this.node);
+        }
+    }
+
     public get index(): number {
         return this._index;
+    }
+    public setIndex(value: number): void {
+        this._index = value;
+
     }
     public get row(): number {
         return this._row;
@@ -40,21 +52,15 @@ export class Tile extends Component {
 
     public setRemoved(value: boolean): void {
         this._isRemoved = value;
-        this.node.name = "setRemoved";
     }
-   
+
     //下落动画
     public dropToNewRow(targetPosition: Vec3) {
-        //const targetPosition = new Vec3(this._col, targetRow);
-        //const currentPos = this.node.position;
-        //const diffY = targetPosition.y - currentPos.y;
-        ////没有变化 不处理
-        //if (diffY == 0) {
-        //    return;
-        //}
-        //执行移动
-        console.error("执行移动");
-        this.node.setPosition(targetPosition);
+        tween(this.node)
+            .to(0.1, { position: targetPosition }, { easing: `cubicInOut` } )
+            .call(() => {
+            })
+            .start()
     }
 
 
