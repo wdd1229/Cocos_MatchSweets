@@ -63,7 +63,7 @@ export class Tile extends Component {
     }
 
     //下落动画
-    public async dropToNewRow(targetPosition: Vec3) {
+    public async dropToNewRow(targetPosition: Vec3):Promise<void> {
         tween(this.node)
             .to(0.4, { position: targetPosition }, { easing: `cubicInOut` } )
             .call(() => {

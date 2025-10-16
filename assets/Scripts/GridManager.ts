@@ -448,7 +448,7 @@ export class GridManager extends Component {
             }
             //await new Promise<void>(resolve => setTimeout(resolve, 500));
             //console.error("空格数量为：" + emptySpaceCount);
-            for (var k = 0; k < emptySpaceCount; k++) {
+            for (var k = emptySpaceCount-1; k >= 0; k--) {
                 const index = (rows - k) * cols + col;
                 //console.error("新创建的格子index" + index + "行：" + (rows - emptySpaceCount)+"列："+col);
                 //const node = await this.createTileAtTop(index, rows - emptySpaceCount,col);
@@ -460,7 +460,8 @@ export class GridManager extends Component {
 
                 //col   0  1  2 
                 //      
-               await this.createTileAtTop(index, rows - k, col);
+                await this.createTileAtTop(index, rows - k, col);
+                await new Promise<void>(resolve => setTimeout(resolve, this.fallDuration * 200));
             }
             console.error(`第` + col + "列有空格：" + emptySpaceCount);
        }
@@ -477,7 +478,7 @@ export class GridManager extends Component {
         //    .start();
     }
     //spaceRow空行数       3
-    async createTileAtTop(index: number, row:number,col:number) {
+    async createTileAtTop(index: number, row: number, col: number): Promise<void> {
         const gridType = this.getRandomGridType(false);
         const node = GameManager.Instance.getGridPrefab(gridType);
         if (!node) {
@@ -501,6 +502,7 @@ export class GridManager extends Component {
         //return node;
 
         await tile.dropToNewRow(targetPos);
+        new Promise<void>(resolve => setTimeout(resolve, this.fallDuration * 2000));
     }
 
     //填充顶部的 empty position
