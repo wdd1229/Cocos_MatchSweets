@@ -15,4 +15,4 @@
     HuangBaoShi,// ="HuangBaoShi",//黄宝石
     LanBaoShi,// ="LanBaoShi",//蓝宝石
     ZuanShi,// ="ZuanShi",//钻石
-}
+}

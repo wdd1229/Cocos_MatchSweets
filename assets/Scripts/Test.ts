@@ -1,24 +1,40 @@
-import { _decorator, Component,resources,Prefab,Animation, error, AnimationClip } from 'cc';
+ï»¿import { _decorator, Component,resources,Prefab,Animation, error, AnimationClip, AnimationState, tween, Button, Sprite, color, Color } from 'cc';
+import { Tile } from './Tile';
 const { ccclass, property } = _decorator;
 
 @ccclass('Test')
 export class Test extends Component {
-    //cocos½Å±¾ÉúÃüÖÜÆÚ£¬¼òµ¥À´Ëµ¾ÍÊÇ Ã¿¸öº¯ÊıµÄÖ´ĞĞË³ĞòºÍ´¥·¢·½Ê½
-    //1.onLoad ¼ÓÔØº¯Êı£º½Å±¾µÚÒ»¸öÖ´ĞĞµÄº¯Êı£¬Ò»°ãÓÃÓÚ ¿ªÆô¼àÌıÊÂ¼ş
-    //2.onDestroy Ïú»Ùº¯Êı£ºµ±×é¼ş»òÕß½Úµã±» Ïú»ÙÊ±£¬Ö´ĞĞÕâ¸öº¯Êı£¬Ò»°ãÓÃÓÚ ¹Ø±Õ¼àÌıÊÂ¼ş
-    //2.start ¿ªÊ¼º¯Êı£º½Å±¾Æô¶¯Ö´ĞĞº¯Êı
+    //cocosè„šæœ¬ç”Ÿå‘½å‘¨æœŸï¼Œç®€å•æ¥è¯´å°±æ˜¯ æ¯ä¸ªå‡½æ•°çš„æ‰§è¡Œé¡ºåºå’Œè§¦å‘æ–¹å¼
+    //1.onLoad åŠ è½½å‡½æ•°ï¼šè„šæœ¬ç¬¬ä¸€ä¸ªæ‰§è¡Œçš„å‡½æ•°ï¼Œä¸€èˆ¬ç”¨äº å¼€å¯ç›‘å¬äº‹ä»¶
+    //2.onDestroy é”€æ¯å‡½æ•°ï¼šå½“ç»„ä»¶æˆ–è€…èŠ‚ç‚¹è¢« é”€æ¯æ—¶ï¼Œæ‰§è¡Œè¿™ä¸ªå‡½æ•°ï¼Œä¸€èˆ¬ç”¨äº å…³é—­ç›‘å¬äº‹ä»¶
+    //2.start å¼€å§‹å‡½æ•°ï¼šè„šæœ¬å¯åŠ¨æ‰§è¡Œå‡½æ•°
     //3.update
     //4.lateupdate
     // onDisable
     //onEnable
+    @property({ type: Button, tooltip: `TestBtn` })
+    public testbtn: Button = null;
+    @property({ type: Button, tooltip: `TestBtn2` })
+    public testbtn2: Button = null;
+    onLoad() {
+
+    }
 
     curState:AnimationClip
-
+    private curAnim: Animation = null;
     start() {
-        console.log("onStart fuc..");
+        this.testbtn.node.on(Button.EventType.CLICK, this.callback, this);
+        this.testbtn2.node.on(Button.EventType.CLICK, this.callback2, this);
+        this.node.getComponent(Tile).inIt(0, 0, 0, 1, null);
 
-        let gridAnim = this.getComponent(Animation);
-        gridAnim.play("3-2");
+
+        console.log("onStart fuc..");
+        this.curAnim = this.getComponent(Animation);
+
+        this.curAnim.on(Animation.EventType.FINISHED, this.onAnimationFinished, this);
+
+        tween(this).delay(3).start();
+
         //console.log(gridAnim.clips[0].name);
 
         // resources.load("AnimatorClip/1-1", AnimationClip, (error, clip) => {
@@ -26,7 +42,7 @@ export class Test extends Component {
         //    //this.getComponent(Animation).addClip(clip, clip.name);
         //     //this.getComponent(Animation).play();
         //     if (clip) {
-        //         console.log("load Success £¡£º" + clip.name);
+        //         console.log("load Success ï¼ï¼š" + clip.name);
         //         this.curState = clip;
         //     }
         //});
@@ -35,7 +51,30 @@ export class Test extends Component {
         
         //console.log(gridAnim.clips[0].name);
     }
+    callback(button: Button) {
+        // æ³¨æ„è¿™ç§æ–¹å¼æ³¨å†Œçš„äº‹ä»¶ï¼Œæ— æ³•ä¼ é€’ customEventData
 
+        this.curAnim.play("effectHideAni");
+        //this.curAnim.play("1");
+
+    }
+    callback2(button: Button) {
+        // æ³¨æ„è¿™ç§æ–¹å¼æ³¨å†Œçš„äº‹ä»¶ï¼Œæ— æ³•ä¼ é€’ customEventData
+
+        const sprite = this.node.getComponent(Sprite);
+        sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 255);
+
+        this.curAnim.play("2");
+
+
+
+    }
+    onAnimationFinished(type: Animation.EventType, state: AnimationState) {
+        if (state.name == "effectHideAni") {
+           
+            //this.curAnim.play("1");
+        }
+    }
     update(deltaTime: number) {
         
     }

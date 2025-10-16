@@ -64,10 +64,6 @@ export class GridManager extends Component {
     }
 
     public startGame() {
-        //this.spawnGridsAsync().then(() => {
-            //this.waitAndProcess();
-        //});
-
         this.spawnGridsAsync().then(() => {
             const matchGrids = this.checkForConnectGrids();
             if (matchGrids.length>0)
@@ -100,21 +96,6 @@ export class GridManager extends Component {
             }).start();
     }
 
-    //public async spawnGridsByRowAsync() {
-    //    this.initLastRowHeight();//重置最后一行的高度
-    //    for (let row = 0; row <= this.levelConfig.Row; row++) {
-    //        await this.spawnGridRowAsync(row);
-    //    }
-    //}
-
-    //private initLastRowHeight() {
-    //    if (this.gridContent && this.gridContent.getComponent(UITransform)) {
-    //        this.lastRowHeight = this.gridContent.getComponent(UITransform).contentSize.height;
-    //    } else {
-    //        this.lastRowHeight = 0;
-    //    }
-    //}
-
     public async spawnGridRowAsync(row: number,isSpecial:boolean) {
         const tilesInRow = [];
         const x = Math.floor(Math.random() * this.levelConfig.Column);
@@ -136,18 +117,6 @@ export class GridManager extends Component {
         })
     }
 
-    //public async spawnGridsAsync() {
-    //    //初始化网格结构
-    //    const x = Math.floor(Math.random() * this.levelConfig.Column);
-    //    const y = Math.floor(Math.random() * this.levelConfig.Row);
-    //    for (var row = 0; row < this.levelConfig.Row + 1; row++) {
-    //        for (var col = 0; col < this.levelConfig.Column; col++) {
-    //            const index = row * this.levelConfig.Column + col;
-    //            await this.spawnGridAtPositionAsync(index,row,col,row==x&&row==y);
-    //        }
-    //    }
-    //}
-
     private async spawnGridAtPositionAsync(index: number, row: number, col: number,isSpeacial: boolean): Promise<Node | null> {
         const gridType = this.getRandomGridType(isSpeacial);
         const node = GameManager.Instance.getGridPrefab(gridType);
@@ -165,9 +134,9 @@ export class GridManager extends Component {
             tile.inIt(index, row, col, gridType, this);
             this.gridNodes[index] = tile;
             // 可选：设置为特殊格子
-            if (row === this.levelConfig.Row) {
-                tile.gridType = GridType.SpecialCollection;
-            }
+            //if (row === this.levelConfig.Row) {
+            //    tile.gridType = GridType.SpecialCollection;
+            //}
         }
         //console.log(`生成格子 ${index} 在第 ${row} 行 ${col} 列`);
         return node;
@@ -218,42 +187,6 @@ export class GridManager extends Component {
         // 没有找到空位，落到最底部
         return this.levelConfig.Row;
     }
-
-    //private async spawnGridAtPositionAsync(index: number, row: number,col: number,isSpeacial:boolean) {
-    //    const gridType = this.getRandomGridType(isSpeacial);
-    //    //console.error("当前随机gridType:" + gridType);
-    //    const node = GameManager.Instance.getGridPrefab(gridType);
-    //    if (node) {
-    //        node.name = index.toString();
-    //        node.getComponent(UITransform).setContentSize(this.cellSize, this.cellSize);
-    //        //设置格子位置
-    //        const targetPos = this.getScreenPosByIndex(index)
-    //        node.position = new Vec3(targetPos.x, this.lastRowHeight, 0);
-    //        //最上面的一层不检测
-    //        const tile = node.getComponent(Tile);
-    //        if (!(Math.floor(index / this.levelConfig.Column) == this.levelConfig.Column)) {
-    //            tile.inIt(index, row, col, gridType, this);
-    //            this.gridNodes[index]=(tile);
-    //        }
-
-    //        console.log("初始化的格子：" + tile.index + "在第" + tile.row + "行 " + "第" + tile.col + "列");
-    //        //等待顶部停留时间
-    //        await new Promise<void>(resolve => {
-    //            setTimeout(() => {
-    //                resolve();
-    //            }, this.delayBeforeFall * 1000); // 转换为毫秒
-    //        });
-    //        // 下落动画
-    //        tween(node)
-    //            .to(this.fallDuration, { position: targetPos })
-    //            .call(() => {
-    //                //this.playSpecialAnim(index);
-    //                node.getComponent(Tile).dropToNewRow(targetPos);
-    //            })
-    //            .start();
-    //    }
-    //}
-
     getScreenPosByIndex(index: any) {
         let pos: any = this.getPosByIndex(index);
         if (pos.y == this.levelConfig.Column) {
@@ -267,7 +200,6 @@ export class GridManager extends Component {
         return new Vec3(index % this.levelConfig.Column, Math.floor(index / this.levelConfig.Row), 0);
     }
 
-
     getRandomGridType(isSpecial: boolean): number {
        // console.error(typeof (GridType.BaiYu));
        //return GridType.BaiYu;
@@ -280,7 +212,7 @@ export class GridManager extends Component {
     private visited: boolean[] = [];
     checkForConnectGrids() {
         let groups: Array<Array<Tile>> = [];
-
+        this.curSpecialGrid = null;
         // 初始化 visited 数组
         this.visited = new Array<boolean>(this.levelConfig.Column * this.levelConfig.Row);
 
@@ -303,43 +235,20 @@ export class GridManager extends Component {
                     const count = this.checkGridDFS(row, col, this.gridNodes[i].gridType, regions);
                     if (count >= 3 && this.isLinear(regions)) {
                         groups.push(regions);
-                        //console.error("*******************");
-                        //for (let k = 0; k < regions.length; k++) {
-                        //    const tile: Tile = regions[k];
-                        //    console.error(tile.name);
+                        console.error("*******************");
+                        for (let k = 0; k < regions.length; k++) {
+                            const tile: Tile = regions[k];
+                            console.error(tile.name);
 
-                        //    //tile.getComponent(Animation).play("effectHideAni");
-                        //}
-                        //console.error("*******************");
+                            //tile.getComponent(Animation).play("effectHideAni");
+                        }
+                        console.error("*******************");
                     }
                 }
             }
         }
-
-        //for (var i = 0; i < this.gridNodes.length; i++) {
-        //    const xIndex = i % this.levelConfig.Column;
-        //    const yIndex = Math.floor(i / this.levelConfig.Row);
-        //    console.error(`Xindex:${xIndex} yIndex:${yIndex}`);
-        //    if (this.gridNodes[i] != null && !this.visited[i]) {
-        //        const regions: Array<Tile> = [];
-        //        const count = this.checkGridDFS(xIndex, yIndex, this.gridNodes[i].gridType, regions);
-
-        //        if (count >= 3 && this.isLinear(regions)) {
-        //            groups.push(regions);
-        //            console.error("*******************");
-        //            for (let k = 0; k < regions.length; k++) {
-        //                const tile: Tile = regions[k];
-        //                console.error(tile.name);
-
-        //                //tile.getComponent(Animation).play("effectHideAni");
-        //            }
-        //            console.error("*******************");
-        //        }
-        //    }
-        //}
-        if (this.curSpecialGrid!=null)
-            groups.push(new Array<Tile>(this.curSpecialGrid));
-
+        //if (this.curSpecialGrid!=null)
+        //    groups.push(new Array<Tile>(this.curSpecialGrid));
         // 2. 按 GridType.SpecialCollection 排序在最前
         groups = groups.sort((a, b) => {
             const typeA = a[0].gridType;
@@ -347,12 +256,6 @@ export class GridManager extends Component {
             return typeA === GridType.SpecialCollection ? -1 : 1;
         });
         return groups;
-
-        //for (var i = 0; i < this.levelConfig.Column; i++) {
-        //    for (var j = 0; j < this.levelConfig.Row; j++) {
-                
-        //    }
-        //}
     }
 
     isLinear(regions: Array<Tile>):boolean {
@@ -403,18 +306,6 @@ export class GridManager extends Component {
     }
 
     cleatAllConnectGrids(matchGrids: Array<Array<Tile>>) {
-        for (let tileArray of matchGrids) {
-            for (let tile of tileArray) {
-                // 操作tile
-                //console.log(tile.index);
-                //this.gridNodes[tile.index] = null;
-                //this.gridNodes[tile.index].setRemoved(true);
-
-                //this.releaseTile(tile.node);
-            }
-        }
-        //    tile.getComponent(Animation).play("effectHideAni");
-
         if (matchGrids.length === 0) {
             return;
         }
@@ -422,14 +313,7 @@ export class GridManager extends Component {
         for (let i = 0; i < matchGrids.length; i++) {
             const tileArray: Tile[] = matchGrids[i];
             const type: GridType = tileArray[0].gridType;
-            // 等待 300ms 后播放该类型动画
-            //tween(this)
-            //    .delay(1 * i) // 每个类型组按序播放
-            //    .call(() => this.playEffectForTileArray(tileArray, type))
-            //    .start();
         }
-
-
 
         //let specialScore = 0;
         //let normalScore = 0;
@@ -492,7 +376,7 @@ export class GridManager extends Component {
 
         if (islast) {
             console.log("消除结束即将开始 下落----");
-            tween(this).delay(2).call(() => {
+            tween(this).delay(1).call(() => {
                 this.dropAndFill();
 
             }).start();
@@ -515,7 +399,14 @@ export class GridManager extends Component {
     }
     //主流程：消除某些tile 触发下落填充
     public dropAndFill(/*matchGrids: Array<Array<Tile>>*/) {
-        this.dropTiles();
+        this.dropTiles().then(() => {
+            const matchGrids = this.checkForConnectGrids();
+            console.log("计算出的要消除的数量组为：" + matchGrids.length);
+            if (matchGrids.length > 0) {
+                this.playAnimationsByType(matchGrids); // 你单独提取了播放动画部分
+            }
+
+        });
         //this.fillTop();
     }
 
@@ -529,7 +420,7 @@ export class GridManager extends Component {
         GameManager.Instance.releaseGridPrefab(tile)
     }
     //下落所有为被消除的tiles (按列下落)
-    dropTiles() {
+   async dropTiles() {
         console.error("开始检测下落逻辑*********");
         let count = 0;
         const cols = this.levelConfig.Column;
@@ -540,7 +431,7 @@ export class GridManager extends Component {
         for (let col = 0; col < cols; col++) {
             emptySpaceCount = 0;
             //从顶部向下找可用的未被消除的tile
-            for (let row = 0; row < rows; row++) {
+            for (let row = 0; row < rows+1; row++) {
                 const index = row * cols + col;
                 const tile = this.gridNodes[index];
                 if (tile == null) {
@@ -550,74 +441,66 @@ export class GridManager extends Component {
                     const targetPos = this.getScreenPosByIndex((row - emptySpaceCount) * cols + col)
                     this.gridNodes[(row - emptySpaceCount) * cols + col] = tile;
                     this.gridNodes[index] = null;
-                    //console.error("目标行为：" + (row - emptySpaceCount) + "目标列未：" + col);
+                    //console.error("当前name"+tile.name+"得出的index：" + ((row - emptySpaceCount) * cols + col)+" 目标行为：" + (row - emptySpaceCount) + "目标列未：" + col);
                     tile.inIt((row - emptySpaceCount) * cols + col, (row - emptySpaceCount), col, tile.gridType, this);
-                    tile.dropToNewRow(targetPos);
+                    await tile.dropToNewRow(targetPos);
                 }
-
-
-                ////如果是未被消除的tile 下落到下方的有效position
-                //if (tile && !tile.isRemoved) {
-                //    console.log("要下落的：" + tile.index +"在第"+tile.row+"行 "+"第"+tile.col+"列");
-                //    const targetRow = this.findValidTilePosition(col, row, tile);
-                //    if (targetRow >= 0 && targetRow < rows && !this.gridNodes[index + (targetRow - row) * cols].isRemoved) {
-                //        console.error("需要下落");
-                //        // 进行下落
-                //        //tile.dropToNewRow(this.gridNodes[targetRow * this.levelConfig.Column + col].node.position);;
-                //    } else {
-                //        // 无下落位置，应该是下落到表格底部
-                //        //tile.dropToNewRow(this.gridNodes[col].node.position);
-                //    }
-                //    count++;
-                //}
             }
-        }
+            //await new Promise<void>(resolve => setTimeout(resolve, 500));
+            //console.error("空格数量为：" + emptySpaceCount);
+            for (var k = 0; k < emptySpaceCount; k++) {
+                const index = (rows - k) * cols + col;
+                //console.error("新创建的格子index" + index + "行：" + (rows - emptySpaceCount)+"列："+col);
+                //const node = await this.createTileAtTop(index, rows - emptySpaceCount,col);
+                //tween(this).
+                //    delay(0.1).
+                //    call(() => {
+
+                //}).start();
+
+                //col   0  1  2 
+                //      
+               await this.createTileAtTop(index, rows - k, col);
+            }
+            console.error(`第` + col + "列有空格：" + emptySpaceCount);
+       }
+       // 延迟 1 秒后再执行回调逻辑
+       await new Promise<void>(resolve => setTimeout(resolve, 1000));
         //console.log("要下落的总数为：" + count);
-
-
-        tween(this)
-            .delay(waitTime * cols + 1)
-            .call(() => {
-                const matchGrids = this.checkForConnectGrids();
-                if (matchGrids.length>0)
-                    this.playAnimationsByType(matchGrids); // 你单独提取了播放动画部分
-            })
-            .start();
-
-        //const matchGrids = this.checkForConnectGrids();
-        //if (matchGrids.length>0)
-        //    this.playAnimationsByType(matchGrids); // 你单独提取了播放动画部分
-       
+        //tween(this)
+        //    .delay(waitTime * cols + 3)
+        //    .call(() => {
+        //        //const matchGrids = this.checkForConnectGrids();
+        //        //if (matchGrids.length>0)
+        //        //    this.playAnimationsByType(matchGrids); // 你单独提取了播放动画部分
+        //    })
+        //    .start();
     }
-
-    
-
-
-    //找到该列未被消除的tile 的下一个可用行
-    private findValidTilePosition(col: number, currentRow: number, tile: Tile): number {
-        let targetRow = currentRow;
-        while (targetRow>=0) {
-            const index = targetRow * this.levelConfig.Column + col;
-            console.log("当前行：" + currentRow + "计算出index:" + index);
-            const tTile = this.gridNodes[index];
-            if (tTile && !tTile.isRemoved) {
-                console.log("最终的targetRow：" + targetRow);
-                return targetRow;
-                //找到空位 下落该tile 至targetRow
-                //console.error(`当前下标为: ${tile.index} 当前行为${currentRow}  要移动到的行为 ${targetRow}`);
-                //this.gridNodes[index] = tTile;
-                //this.gridNodes[tile.index] = null;
-                //tTile.inIt(index, targetRow, col, tTile.gridType,this);
-                //tTile.setRemoved(false);
-                //tTile.dropToNewRow(tTile.node.position);
-            }
-            //else if (tTile && !tTile.isRemoved) {
-            //    break;
-            //}
-            targetRow--;
+    //spaceRow空行数       3
+    async createTileAtTop(index: number, row:number,col:number) {
+        const gridType = this.getRandomGridType(false);
+        const node = GameManager.Instance.getGridPrefab(gridType);
+        if (!node) {
+            console.error("无法生成格子，GridPrefab 未加载!");
+            return null;
         }
-        console.log("最终的targetRow：" + targetRow);
-        return -1;
+        node.name = index.toString();
+        node.getComponent(UITransform).setContentSize(this.cellSize, this.cellSize);
+        console.error("新创建的格子index：" + index + "  行： " + row + " 列 ：" + col+"  name:"+node.name);0
+        const targetPos = this.getScreenPosByIndex(index);
+        node.position = new Vec3(targetPos.x, this.lastRowHeight, 0);
+        const tile = node.getComponent(Tile);
+        console.error("新格子的动画类型为：" + gridType.toString());
+        tile.getComponent(Animation).play(gridType.toString());
+        if (tile) {
+            tile.inIt(index, row, col, gridType, this);
+            this.gridNodes[index] = tile;
+            // 可选：设置为特殊格子
+        }
+        //console.log(`生成格子 ${index} 在第 ${row} 行 ${col} 列`);
+        //return node;
+
+        await tile.dropToNewRow(targetPos);
     }
 
     //填充顶部的 empty position
