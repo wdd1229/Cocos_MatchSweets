@@ -1,8 +1,9 @@
-﻿import { _decorator, Component,Animation, Node,find, tween, UITransform, Vec2, Vec3, easing, log } from 'cc';
+﻿import { _decorator, Component,Animation, Node,find, tween, UITransform, Vec3, log } from 'cc';
 import { JsonManager, LevelConfig } from './JsonManager';
 import GameManager from './GameManager';
 import { Tile } from './Tile';
 import { GridType } from './GridType';
+import { ScoreItem } from './ScoreItem';
 const { ccclass, property } = _decorator;
 
 @ccclass('GridManager')
@@ -124,7 +125,7 @@ export class GridManager extends Component {
             console.error("无法生成格子，GridPrefab 未加载!");
             return null;
         }
-        node.name = index.toString();
+        //node.name = "New"+index.toString();
         node.getComponent(UITransform).setContentSize(this.cellSize, this.cellSize);
 
         const targetPos = this.getScreenPosByIndex(index);
@@ -373,7 +374,11 @@ export class GridManager extends Component {
         const count = tileArray.length;
         const score = GameManager.Instance.getScoreForConnetGridsAndGridType(type, count);
         console.error(`类型为：${type} 的消除格子个数为：${count}，对应分数为：${score}`);
-
+        const scoreItem = GameManager.Instance.getScoreItemPrefab();
+        const sprite = GameManager.Instance.getSpriteForGridType(type);
+        if (scoreItem && scoreItem.getComponent(ScoreItem)) {
+            scoreItem.getComponent(ScoreItem).Init(type,sprite, count, score);
+        }
         if (islast) {
             console.log("消除结束即将开始 下落----");
             tween(this).delay(1).call(() => {
@@ -487,11 +492,11 @@ export class GridManager extends Component {
         }
         node.name = index.toString();
         node.getComponent(UITransform).setContentSize(this.cellSize, this.cellSize);
-        console.error("新创建的格子index：" + index + "  行： " + row + " 列 ：" + col+"  name:"+node.name);0
+        //console.error("新创建的格子index：" + index + "  行： " + row + " 列 ：" + col+"  name:"+node.name);
         const targetPos = this.getScreenPosByIndex(index);
         node.position = new Vec3(targetPos.x, this.lastRowHeight, 0);
         const tile = node.getComponent(Tile);
-        console.error("新格子的动画类型为：" + gridType.toString());
+        //console.error("新格子的动画类型为：" + gridType.toString());
         tile.getComponent(Animation).play(gridType.toString());
         if (tile) {
             tile.inIt(index, row, col, gridType, this);

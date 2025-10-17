@@ -1,0 +1,887 @@
+[
+  {
+    "__type__": "cc.animation.AnimationGraph",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "_native": "",
+    "_layers": [
+      {
+        "__id__": 1
+      }
+    ],
+    "_variables": {}
+  },
+  {
+    "__type__": "cc.animation.Layer",
+    "_stateMachine": {
+      "__id__": 2
+    },
+    "name": "",
+    "weight": 1,
+    "mask": null,
+    "additive": false,
+    "_stashes": {}
+  },
+  {
+    "__type__": "cc.animation.StateMachine",
+    "__editorExtras__": {
+      "name": "",
+      "id": "df78bf68-e47e-44d0-8ecf-b24930825923",
+      "clone": null
+    },
+    "_states": [
+      {
+        "__id__": 3
+      },
+      {
+        "__id__": 4
+      },
+      {
+        "__id__": 5
+      },
+      {
+        "__id__": 6
+      },
+      {
+        "__id__": 10
+      },
+      {
+        "__id__": 14
+      },
+      {
+        "__id__": 18
+      },
+      {
+        "__id__": 22
+      },
+      {
+        "__id__": 26
+      },
+      {
+        "__id__": 30
+      },
+      {
+        "__id__": 34
+      },
+      {
+        "__id__": 38
+      },
+      {
+        "__id__": 42
+      },
+      {
+        "__id__": 46
+      },
+      {
+        "__id__": 50
+      },
+      {
+        "__id__": 54
+      },
+      {
+        "__id__": 58
+      },
+      {
+        "__id__": 62
+      },
+      {
+        "__id__": 66
+      },
+      {
+        "__id__": 70
+      }
+    ],
+    "_transitions": [],
+    "_entryState": {
+      "__id__": 3
+    },
+    "_exitState": {
+      "__id__": 4
+    },
+    "_anyState": {
+      "__id__": 5
+    }
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "name": "",
+      "id": "870a06a4-7226-415f-ad85-0e53e1888b38",
+      "clone": null,
+      "centerX": -149.46808510638297,
+      "centerY": 184.04255319148933
+    },
+    "name": "Entry"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "name": "",
+      "id": "70e9fdf2-d14d-4712-b7af-d32e2f0d9432",
+      "clone": null,
+      "centerX": 125,
+      "centerY": 0
+    },
+    "name": "Exit"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "name": "",
+      "id": "3ef4b7ad-54fd-4063-b588-5c99ddaed20f",
+      "clone": null,
+      "centerX": 233.51063829787233,
+      "centerY": 192.55319148936172
+    },
+    "name": "Any"
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "34018468-d186-4dd2-b109-8e7893dad81d",
+      "clone": null,
+      "centerX": 27.595760264295166,
+      "centerY": -85.10638817320478
+    },
+    "name": "1",
+    "_components": [],
+    "motion": {
+      "__id__": 7
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 8
+    },
+    "transitionOutEventBinding": {
+      "__id__": 9
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "ed433cc7-e063-4dce-acb9-2301e71619e7",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "f806249f-a241-4c4a-a912-225614c2a267",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "aeac4de6-08c7-4f8b-94df-b594db63d719",
+      "clone": null,
+      "centerX": 27.595760264295166,
+      "centerY": -53.10638817320478
+    },
+    "name": "2",
+    "_components": [],
+    "motion": {
+      "__id__": 11
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 12
+    },
+    "transitionOutEventBinding": {
+      "__id__": 13
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "63a5ba24-a5d0-4919-a518-a06f746fda30",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "9cefd499-567a-487c-a5dc-0a9e97d4036e",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "11a113f4-d6ed-43a6-a51e-3c39cbbfa513",
+      "clone": null,
+      "centerX": 27.595760264295166,
+      "centerY": -21.106388173204778
+    },
+    "name": "3",
+    "_components": [],
+    "motion": {
+      "__id__": 15
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 16
+    },
+    "transitionOutEventBinding": {
+      "__id__": 17
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "5e55eb42-89ca-4d89-9e27-9132a142c9f2",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "01922f5c-e566-442a-967b-3058755ffbe1",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "f2391a71-1f9e-4471-8866-6a300647a551",
+      "clone": null,
+      "centerX": 27.595760264295166,
+      "centerY": 10.893611826795222
+    },
+    "name": "4",
+    "_components": [],
+    "motion": {
+      "__id__": 19
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 20
+    },
+    "transitionOutEventBinding": {
+      "__id__": 21
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "0bca52e4-1d78-4f9b-983b-3d5b34a0e9a0",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "24f76ce1-5802-48d3-a596-02aa9fd74d91",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "726bd051-43a3-40ca-99ac-38b26eefce5a",
+      "clone": null,
+      "centerX": 27.595760264295166,
+      "centerY": 42.89361182679522
+    },
+    "name": "5",
+    "_components": [],
+    "motion": {
+      "__id__": 23
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 24
+    },
+    "transitionOutEventBinding": {
+      "__id__": 25
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "18e9401d-2f04-491d-84e3-f6c6940451ad",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "659a43ae-89b0-4c00-888f-e10aa5135bb7",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "919e22ff-3eb2-42ae-87dc-4fd966a8a8ed",
+      "clone": null,
+      "centerX": 220.1489517536569,
+      "centerY": -48.93617540724733
+    },
+    "name": "6",
+    "_components": [],
+    "motion": {
+      "__id__": 27
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 28
+    },
+    "transitionOutEventBinding": {
+      "__id__": 29
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "2e91390e-1e7f-4f84-805b-e17e42dbcf4a",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "2d85d38b-dc5a-4517-a71e-da640aa4a32c",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "63b78e61-ce40-4483-a4dc-328146e84b3d",
+      "clone": null,
+      "centerX": 220.1489517536569,
+      "centerY": -16.936175407247333
+    },
+    "name": "7",
+    "_components": [],
+    "motion": {
+      "__id__": 31
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 32
+    },
+    "transitionOutEventBinding": {
+      "__id__": 33
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "ae433862-349b-4e1a-b174-d19f65525092",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "ee0bcd16-5990-4ec9-9aa9-fc5d4240d5db",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "ec25e390-68b6-44ae-ba86-1e2848eed2fd",
+      "clone": null,
+      "centerX": 220.1489517536569,
+      "centerY": 15.063824592752667
+    },
+    "name": "8",
+    "_components": [],
+    "motion": {
+      "__id__": 35
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 36
+    },
+    "transitionOutEventBinding": {
+      "__id__": 37
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "aa062a42-7dce-4cf7-a537-eae1a53ffa1d",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "d2b5587a-50b0-4004-a904-c5f9d31f3768",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "12eec707-2a1a-42d6-9f61-c8074b75e420",
+      "clone": null,
+      "centerX": 220.1489517536569,
+      "centerY": 47.06382459275267
+    },
+    "name": "9",
+    "_components": [],
+    "motion": {
+      "__id__": 39
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 40
+    },
+    "transitionOutEventBinding": {
+      "__id__": 41
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "092f5615-e2b4-4079-b077-4b375a8bae4d",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "bd706bad-a825-4f69-9d0d-e66911a7c439",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "6fdf69ee-6f6f-4e31-8e6b-90b5afab1c0e",
+      "clone": null,
+      "centerX": 220.1489517536569,
+      "centerY": 79.06382459275267
+    },
+    "name": "10",
+    "_components": [],
+    "motion": {
+      "__id__": 43
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 44
+    },
+    "transitionOutEventBinding": {
+      "__id__": 45
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "5165130a-cb56-4236-b3d5-5abb9cdc951a",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "093ee0e5-af63-469a-ab27-a212726c0d4f",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "ea5587df-a440-41ae-be85-a0e7c460d10b",
+      "clone": null,
+      "centerX": 385.04256877493356,
+      "centerY": -10.638303066821834
+    },
+    "name": "11",
+    "_components": [],
+    "motion": {
+      "__id__": 47
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 48
+    },
+    "transitionOutEventBinding": {
+      "__id__": 49
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "d421abca-50ea-47b3-aec8-f77dd6f5023e",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "87e785a4-787c-480e-b606-6190118cae1b",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "b6bf6230-5b2d-4f85-b1f1-5e0414e9f979",
+      "clone": null,
+      "centerX": 385.04256877493356,
+      "centerY": 21.361696933178166
+    },
+    "name": "12",
+    "_components": [],
+    "motion": {
+      "__id__": 51
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 52
+    },
+    "transitionOutEventBinding": {
+      "__id__": 53
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "8534e0f1-ba94-465a-a0b9-486ac4a15410",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "bee325c2-4501-420a-a0e6-f4408275f1a6",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "6e9ee9dd-69ca-49be-be2d-ab06dd28e22a",
+      "clone": null,
+      "centerX": 385.04256877493356,
+      "centerY": 53.361696933178166
+    },
+    "name": "13",
+    "_components": [],
+    "motion": {
+      "__id__": 55
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 56
+    },
+    "transitionOutEventBinding": {
+      "__id__": 57
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "fe896f96-9915-4499-ab7c-a4bbd37a3694",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "7644de20-6276-4aed-bcdd-9473ac74647e",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "14a48d2c-c38d-4d11-aba9-ad583f00acfe",
+      "clone": null,
+      "centerX": 385.04256877493356,
+      "centerY": 85.36169693317817
+    },
+    "name": "14",
+    "_components": [],
+    "motion": {
+      "__id__": 59
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 60
+    },
+    "transitionOutEventBinding": {
+      "__id__": 61
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "aef49d28-cfef-4216-8bd1-b95cdb9554f4",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "fa1c7bd1-b0ba-42bd-bc19-9eab16b6c1d7",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "ecea6ea6-61a3-4816-be56-aa34e64e8ce3",
+      "clone": null,
+      "centerX": 385.04256877493356,
+      "centerY": 117.36169693317817
+    },
+    "name": "15",
+    "_components": [],
+    "motion": {
+      "__id__": 63
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 64
+    },
+    "transitionOutEventBinding": {
+      "__id__": 65
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "4200d366-dbe1-4105-9e81-7677e237261b",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "bf7b3e9e-0885-4670-ae47-0d39d6fc0305",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "de3fc135-3b66-4bc5-a7bd-8d700fb57b2e",
+      "clone": null,
+      "centerX": -105.38296313996017,
+      "centerY": -91.48936689660903
+    },
+    "name": "0",
+    "_components": [],
+    "motion": {
+      "__id__": 67
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 68
+    },
+    "transitionOutEventBinding": {
+      "__id__": 69
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "30392406-49b5-4dcd-8693-43f04f3eac35",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "80dab3c2-c5c3-4e9a-83e4-39bec3443e13",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "37d44993-d9c4-42fe-bc68-98c1c0c322d7",
+      "clone": null,
+      "centerX": 61.6383134557845,
+      "centerY": 171.27659055019944
+    },
+    "name": "effectHideAni",
+    "_components": [],
+    "motion": {
+      "__id__": 71
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false,
+    "transitionInEventBinding": {
+      "__id__": 72
+    },
+    "transitionOutEventBinding": {
+      "__id__": 73
+    }
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "name": "",
+      "id": "5b1a23a8-cdc2-4d44-b193-534e82dfb72b",
+      "clone": null
+    },
+    "clip": {
+      "__uuid__": "14073419-931c-48e7-857e-b6ef632f26e0",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  },
+  {
+    "__type__": "cc.animation.AnimationGraphEventBinding",
+    "methodName": ""
+  }
+]

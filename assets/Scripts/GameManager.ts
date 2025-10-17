@@ -1,4 +1,4 @@
-﻿import { _decorator, Component, Node ,find} from 'cc';
+﻿import { _decorator, Component, Node ,find, Prefab} from 'cc';
 import { JsonManager, LevelConfig } from './JsonManager';
 import { PrefabManager } from './PrefabManager';
 import { GridManager } from './GridManager';
@@ -120,8 +120,16 @@ export default class GameManager extends Component {
         return this.jsonManager.GetScore(gridType, connectGrids);
     }
 
-    public getGridPrefab(gridType: GridType): Node {
+    public  getGridPrefab(gridType: GridType):Node {
         return this.prefabManager.getGridPrefab(gridType);
+    }
+
+    public getScoreItemPrefab():Node {
+        return this.prefabManager.getScoreItemPrefab();
+    }
+
+    public getSpriteForGridType(gridType:GridType) {
+        return this.prefabManager.getSpriteForGridType(gridType);
     }
 
     public releaseGridPrefab(node:Node) {

@@ -78,12 +78,12 @@ export class JsonManager extends Component {
     public GetScore(gridType: number, connectCount: number): number {
         if (this.LevelScoreData == null) {
             console.log("LevelScoreData数据为空 请检查Json数据");
-            return;
+            return 0;
         }
         const levelConfig = this.LevelScoreData.find(level => level.curLevelIndex === 0); // 当前选择的是第 0 个关卡
-        if (!levelConfig) return null;
+        if (!levelConfig) return 0;
         const data = levelConfig.levelScoreDatas.find(item => item.gridType === gridType && item.connectCount === connectCount);
-        return data ? data.score : null;
+        return data ? data.score : 0;
     }
 }
 
