@@ -67,10 +67,29 @@ export class GridManager extends Component {
     public startGame() {
         this.spawnGridsAsync().then(() => {
             const matchGrids = this.checkForConnectGrids();
-            if (matchGrids.length>0)
+            if (matchGrids.length > 0)
                 this.waitAndProcess(matchGrids);
+            else {
+                //爆炸后重新生成
+                this.startExplode().then(() => {
+                    this.startGame();
+                });
+
+            }
         });
     }
+
+    async startExplode() {
+        for (var i = 0; i < this.gridNodes.length; i++) {
+            if (this.gridNodes[i] != null) {
+                this.gridNodes[i].initExplode();
+                this.gridNodes[i] = null;
+            }
+        }
+        // 延迟 1 秒后再执行回调逻辑
+        await new Promise<void>(resolve => setTimeout(resolve, 1000));
+    }
+
 
     public async spawnGridsAsync() {
         const y = Math.floor(Math.random() * this.levelConfig.Row);
@@ -207,7 +226,7 @@ export class GridManager extends Component {
         if (isSpecial) {
             return GridType.SpecialCollection;
         } else {
-            return Math.floor(Math.random() * 3)+1;
+            return Math.floor(Math.random() * 15)+1;
         }
     }
     private visited: boolean[] = [];
@@ -234,17 +253,25 @@ export class GridManager extends Component {
                     //regions = [];
                     //console.error(`Xindex:${row} yIndex:${col}`);
                     const count = this.checkGridDFS(row, col, this.gridNodes[i].gridType, regions);
-                    if (count >= 3 && this.isLinear(regions)) {
+                    if (count > 0 && regions[0].gridType == GridType.SpecialCollection) {
                         groups.push(regions);
                         console.error("*******************");
-                        for (let k = 0; k < regions.length; k++) {
-                            const tile: Tile = regions[k];
-                            console.error(tile.name);
-
-                            //tile.getComponent(Animation).play("effectHideAni");
-                        }
+                        console.error("添加特殊收集器");
                         console.error("*******************");
+                    } else if (count >= 3 && regions[0].gridType != GridType.SpecialCollection && this.isLinear(regions)) {
+                        //if (count >= 3 && this.isLinear(regions)) {
+                            groups.push(regions);
+                            console.error("*******************");
+                            for (let k = 0; k < regions.length; k++) {
+                                const tile: Tile = regions[k];
+                                console.error(tile.name);
+
+                                //tile.getComponent(Animation).play("effectHideAni");
+                            }
+                            console.error("*******************");
+                        //}
                     }
+                    
                 }
             }
         }
@@ -403,17 +430,24 @@ export class GridManager extends Component {
         }      
     }
     //主流程：消除某些tile 触发下落填充
-    public dropAndFill(/*matchGrids: Array<Array<Tile>>*/) {
+    public async dropAndFill(/*matchGrids: Array<Array<Tile>>*/) {
         this.dropTiles().then(() => {
             const matchGrids = this.checkForConnectGrids();
             console.log("计算出的要消除的数量组为：" + matchGrids.length);
             if (matchGrids.length > 0) {
                 this.playAnimationsByType(matchGrids); // 你单独提取了播放动画部分
+            } else {
+                //爆炸重新生成逻辑
+                this.startExplode().then(() => {
+                    this.startGame();
+                });
             }
 
         });
         //this.fillTop();
     }
+
+
 
 
     //释放tile节点 ：归还到对象池
@@ -430,7 +464,9 @@ export class GridManager extends Component {
         let count = 0;
         const cols = this.levelConfig.Column;
         const rows = this.levelConfig.Row;
-        let emptySpaceCount = 0;
+       let emptySpaceCount = 0;
+
+       let curTiles
 
         let waitTime = 0;
         for (let col = 0; col < cols; col++) {
@@ -442,45 +478,29 @@ export class GridManager extends Component {
                 if (tile == null) {
                     emptySpaceCount++;
                 } else if (emptySpaceCount > 0) {
+
                     //console.error("空格数量" + emptySpaceCount + "当前index:" + index + "要移动到" + (row - emptySpaceCount) * cols + col);
                     const targetPos = this.getScreenPosByIndex((row - emptySpaceCount) * cols + col)
                     this.gridNodes[(row - emptySpaceCount) * cols + col] = tile;
                     this.gridNodes[index] = null;
                     //console.error("当前name"+tile.name+"得出的index：" + ((row - emptySpaceCount) * cols + col)+" 目标行为：" + (row - emptySpaceCount) + "目标列未：" + col);
                     tile.inIt((row - emptySpaceCount) * cols + col, (row - emptySpaceCount), col, tile.gridType, this);
-                    await tile.dropToNewRow(targetPos);
+                    tile.dropToNewRow(targetPos);
                 }
             }
             //await new Promise<void>(resolve => setTimeout(resolve, 500));
             //console.error("空格数量为：" + emptySpaceCount);
             for (var k = emptySpaceCount-1; k >= 0; k--) {
                 const index = (rows - k) * cols + col;
-                //console.error("新创建的格子index" + index + "行：" + (rows - emptySpaceCount)+"列："+col);
-                //const node = await this.createTileAtTop(index, rows - emptySpaceCount,col);
-                //tween(this).
-                //    delay(0.1).
-                //    call(() => {
-
-                //}).start();
-
-                //col   0  1  2 
-                //      
                 await this.createTileAtTop(index, rows - k, col);
                 await new Promise<void>(resolve => setTimeout(resolve, this.fallDuration * 200));
             }
-            console.error(`第` + col + "列有空格：" + emptySpaceCount);
+            //console.error(`第` + col + "列有空格：" + emptySpaceCount);
        }
        // 延迟 1 秒后再执行回调逻辑
        await new Promise<void>(resolve => setTimeout(resolve, 1000));
-        //console.log("要下落的总数为：" + count);
-        //tween(this)
-        //    .delay(waitTime * cols + 3)
-        //    .call(() => {
-        //        //const matchGrids = this.checkForConnectGrids();
-        //        //if (matchGrids.length>0)
-        //        //    this.playAnimationsByType(matchGrids); // 你单独提取了播放动画部分
-        //    })
-        //    .start();
+
+
     }
     //spaceRow空行数       3
     async createTileAtTop(index: number, row: number, col: number): Promise<void> {
