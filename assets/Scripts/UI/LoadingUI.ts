@@ -1,6 +1,5 @@
 ﻿import { _decorator, Component, Node, ProgressBar, Label, labelAssembler,  } from 'cc';
-import GameManager from './GameManager';
-import { JsonManager } from './JsonManager';
+import GameManager from '../GameManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('LoadingUI')

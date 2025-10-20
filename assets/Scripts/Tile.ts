@@ -63,7 +63,7 @@ export class Tile extends Component {
         this._isRemoved = value;
     }
 
-    //下落动画
+    /**下落动画*/
     public async dropToNewRow(targetPosition: Vec3): Promise<void> {
         tween(this.node)
             .to(0.4, { position: targetPosition }, { easing: `cubicInOut` })
@@ -71,7 +71,7 @@ export class Tile extends Component {
             })
             .start()
     }
-
+    /**爆炸效果 抛物线*/
     initExplode() {
         const node = this.node;
         let startPos = node.position //起点，抛物线开始的坐标

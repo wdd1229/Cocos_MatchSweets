@@ -399,13 +399,19 @@ export class GridManager extends Component {
 
         // 这里可以补充后续逻辑，如：分数统计、隐藏节点等
         const count = tileArray.length;
-        const score = GameManager.Instance.getScoreForConnetGridsAndGridType(type, count);
-        console.error(`类型为：${type} 的消除格子个数为：${count}，对应分数为：${score}`);
-        const scoreItem = GameManager.Instance.getScoreItemPrefab();
-        const sprite = GameManager.Instance.getSpriteForGridType(type);
-        if (scoreItem && scoreItem.getComponent(ScoreItem)) {
-            scoreItem.getComponent(ScoreItem).Init(type,sprite, count, score);
+       
+
+        if (type != GridType.SpecialCollection) {
+            const score = GameManager.Instance.getScoreForConnetGridsAndGridType(type, count);
+            console.error(`类型为：${type} 的消除格子个数为：${count}，对应分数为：${score}`);
+            const scoreItem = GameManager.Instance.getScoreItemPrefab();
+            const sprite = GameManager.Instance.getSpriteForGridType(type);
+            if (scoreItem && scoreItem.getComponent(ScoreItem)) {
+                scoreItem.getComponent(ScoreItem).Init(type, sprite, count, score);
+            }
+            GameManager.Instance.addcurIndexScore(score);
         }
+        
         if (islast) {
             console.log("消除结束即将开始 下落----");
             tween(this).delay(1).call(() => {

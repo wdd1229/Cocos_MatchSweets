@@ -1,6 +1,5 @@
 ﻿import { _decorator, Button, Component } from 'cc';
-import GameManager from './GameManager';
-import { JsonManager } from './JsonManager';
+import GameManager from '../GameManager';
 const { ccclass, property } = _decorator;
 @ccclass('MainUI')
 export class MainUI extends Component {

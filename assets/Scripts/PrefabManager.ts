@@ -31,7 +31,7 @@ export class PrefabManager extends Component {
     private screenHeight: number;
     onLoad() {
         this.gridRoot = find("Canvas/GameUI/gridContent/gridRoot");
-        this.scoreItemRoot = find("Canvas/GameUI/scoreContent");
+        this.scoreItemRoot = find("Canvas/GameUI/scoreItemContent");
         this.scoreContent = find("Canvas/GameUI/ScrollView/view/scoreContent");
         this.LoadGridPrefab();
         this.LoadscoreItemPrefab();
