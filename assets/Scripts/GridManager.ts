@@ -63,23 +63,55 @@ export class GridManager extends Component {
         // 初始化 visited 数组
         this.visited = new Array<boolean>(this.levelConfig.Column * this.levelConfig.Row).fill(false);
     }
-
+    public curIsExploadState: boolean = false;
+    public isGameOver: boolean = false;
     public startGame() {
+        this.curIsExploadState = false;
+        if (this.isGameOver) {
+            return;
+        }
         this.spawnGridsAsync().then(() => {
             const matchGrids = this.checkForConnectGrids();
             if (matchGrids.length > 0)
                 this.waitAndProcess(matchGrids);
             else {
-                //爆炸后重新生成
-                this.startExplode().then(() => {
-                    this.startGame();
-                });
-
+                this.curIsExploadState = true;
+                if (GameManager.Instance.getAiState()) {
+                    //爆炸后重新生成
+                    this.InitExplode();
+                }
             }
         });
     }
 
+    async clearAllGrid() {
+        for (var i = 0; i < this.gridNodes.length; i++) {
+            if (this.gridNodes[i] != null) {
+                this.gridNodes[i].getComponent(Animation).play("effectHideAni");
+                //this.gridNodes[tile.index].setRemoved(true);
+                this.gridNodes[i] = null;
+            }
+        }
+        // 延迟 1 秒后再执行回调逻辑
+        await new Promise<void>(resolve => setTimeout(resolve, 1000));
+        this.startGame();
+    }
+
+    InitExplode() {
+        if (this.curIsExploadState == false) {
+            console.error("当前curIsExploadState为false 不允许Explode")
+            return;
+        }
+        this.startExplode().then(() => {
+            GameManager.Instance.addgameTotalScore();
+            this.startGame();
+        });
+    }
     async startExplode() {
+        if (this.isGameOver) {
+            log("游戏已结束，不生成格子");
+            return;
+        }
         for (var i = 0; i < this.gridNodes.length; i++) {
             if (this.gridNodes[i] != null) {
                 this.gridNodes[i].initExplode();
@@ -99,6 +131,10 @@ export class GridManager extends Component {
     }
 
     private waitAndProcess(matchGrids: Array<Array<Tile>>) {
+        if (this.isGameOver) {
+            log("游戏已结束，不执行消除逻辑");
+            return;
+        }
         log("开始执行消除逻辑111...");
         tween(this)
             .delay(1)
@@ -226,7 +262,7 @@ export class GridManager extends Component {
         if (isSpecial) {
             return GridType.SpecialCollection;
         } else {
-            return Math.floor(Math.random() * 15)+1;
+            return Math.floor(Math.random() * 5)+1;
         }
     }
     private visited: boolean[] = [];
@@ -376,16 +412,18 @@ export class GridManager extends Component {
     }
 
     private playEffectForTileArray(tileArray: Tile[], type: GridType,islast:boolean) {
-        if (!tileArray || tileArray.length === 0) return;
+        if (!tileArray || tileArray.length === 0 ||(GameManager.Instance.getCurGamewallCount() >= GameManager.Instance.getLevelwallCount())) return;
         for (const tile of tileArray) {
             if (tile && tile.getComponent(Animation)) {
                 if (tile.gridType == GridType.SpecialCollection) {
                     this.curSpecialGrid = null;
-                }
-                tile.getComponent(Animation).play("effectHideAni");
-                //this.gridNodes[tile.index].setRemoved(true);
-                this.gridNodes[tile.index] = null;
-                //this.releaseTile(tile.node);
+                } 
+
+                    tile.getComponent(Animation).play("effectHideAni");
+                    //this.gridNodes[tile.index].setRemoved(true);
+                    this.gridNodes[tile.index] = null;
+                    //this.releaseTile(tile.node);
+                
             }
         }
 
@@ -402,6 +440,10 @@ export class GridManager extends Component {
        
 
         if (type != GridType.SpecialCollection) {
+            if (GameManager.Instance.getCurGamewallCount() >= GameManager.Instance.getLevelwallCount()) {
+                console.error("00000000000000000");
+                return;
+            }
             const score = GameManager.Instance.getScoreForConnetGridsAndGridType(type, count);
             console.error(`类型为：${type} 的消除格子个数为：${count}，对应分数为：${score}`);
             const scoreItem = GameManager.Instance.getScoreItemPrefab();
@@ -410,9 +452,19 @@ export class GridManager extends Component {
                 scoreItem.getComponent(ScoreItem).Init(type, sprite, count, score);
             }
             GameManager.Instance.addcurIndexScore(score);
+        } else {
+            GameManager.Instance.setCurGamewallCount();
+            if (GameManager.Instance.getCurGamewallCount() >= GameManager.Instance.getLevelwallCount()) {
+                GameManager.Instance.addgameTotalScore();
+                GameManager.Instance.setGameoverState(true);
+                GameManager.Instance.GameUI.initlevelTips();
+
+                //过关了
+                return;
+            }
         }
         
-        if (islast) {
+        if (islast && GameManager.Instance.getCurGamewallCount() < GameManager.Instance.getLevelwallCount()) {
             console.log("消除结束即将开始 下落----");
             tween(this).delay(1).call(() => {
                 this.dropAndFill();
@@ -437,18 +489,23 @@ export class GridManager extends Component {
     }
     //主流程：消除某些tile 触发下落填充
     public async dropAndFill(/*matchGrids: Array<Array<Tile>>*/) {
+        if (this.isGameOver) {
+            log("游戏已结束，不执行下落逻辑");
+            return;
+        }
         this.dropTiles().then(() => {
             const matchGrids = this.checkForConnectGrids();
             console.log("计算出的要消除的数量组为：" + matchGrids.length);
             if (matchGrids.length > 0) {
                 this.playAnimationsByType(matchGrids); // 你单独提取了播放动画部分
             } else {
+                this.curIsExploadState = true;
                 //爆炸重新生成逻辑
-                this.startExplode().then(() => {
-                    this.startGame();
-                });
+                if (GameManager.Instance.getAiState()) {
+                    //爆炸后重新生成
+                    this.InitExplode();
+                }
             }
-
         });
         //this.fillTop();
     }

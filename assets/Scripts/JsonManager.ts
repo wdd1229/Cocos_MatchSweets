@@ -68,11 +68,15 @@ export class JsonManager extends Component {
     }
     /// 根据关卡编号返回配置
     public GetLevelConfig(levelIndex: number): LevelConfig  {
-        if (this.LevelScoreData == null) {
+        if (this.LevelData == null) {
             console.log("LevelData数据为空 请检查Json数据");
             return;
         }
         return this.LevelData.find(level => level.levelIndex === levelIndex) || null;
+    }
+
+    public GetLevelConfigLen() {
+        return this.LevelData.length;
     }
 
     public GetScore(gridType: number, connectCount: number): number {

@@ -31,18 +31,23 @@ export default class GameManager extends Component {
     //ui
     private LoadingUI: LoadingUI = null;
     private MainUI: MainUI = null;
-    private GameUI: GameUI = null;
+    public GameUI: GameUI = null;
     @property
     private prefabManager: PrefabManager = null;
     @property
-    private gridManager: GridManager = null;
+    public gridManager: GridManager = null;
     @property
     private jsonManager: JsonManager = null;
     private Canvas: Node = null;
     /** 游戏总分数*/
-    private gameTotalScore: number = -1;
+    private gameTotalScore: number = 0;
     /** 当前关卡分数*/
-    private curLevelSocre: number = -1;
+    private curLevelSocre: number = 0;
+
+    private curLevelwallCount: number = 0;
+
+    /**当前是否托管 */
+    private aiState: boolean = false;
     onLoad() {
         GameManager._instance = this;
         console.log("GameManager -- onLoad");
@@ -171,9 +176,12 @@ export default class GameManager extends Component {
         return this.gameTotalScore;
     }
     /**游戏总分数增加 */
-    public set addgameTotalScore(value:number) {
-        this.gameTotalScore += value;
+    public addgameTotalScore() {
+        this.gameTotalScore += this.curLevelSocre;
+        this.curLevelSocre = 0;
+        this.addcurIndexScore(0);
         this.GameUI.refreshTotalScore(this.gameTotalScore);
+        this.GameUI.refreshLevelScore(this.curLevelSocre);
     }
     /**
      * /获取当前关卡得分
@@ -190,6 +198,54 @@ export default class GameManager extends Component {
         this.curLevelSocre += value;
         //通知ui更新
         this.GameUI.refreshLevelScore(this.curLevelSocre);
+    }
+    /**
+     * /获取托管状态
+     * @returns
+     */
+    public getAiState(): boolean {
+        return this.aiState;
+    }
+
+    public setAiState() {
+        this.aiState=!this.aiState;
+    }
+    /**
+     * 获取当前关卡需要过关的wall数量
+     * @returns
+     */
+    public getLevelwallCount() {
+       return this.jsonManager.GetLevelConfig(this.curLevelIndex).wallCount;
+    }
+
+    /**
+     * 获取当前游戏记录的wall数量
+     */
+    public getCurGamewallCount():number {
+        return this.curLevelwallCount;
+    }
+    /**增加 当前游戏记录的wall数量*/
+    public setCurGamewallCount() {
+        this.curLevelwallCount += 1;
+    }
+
+
+    public clearAllGrid() {
+        if (this.curLevelIndex+1 > this.jsonManager.GetLevelConfigLen()) {
+            this.GameUI.node.active = false;
+            console.error("关卡结束了。。。");
+            return;
+        }
+        this.curLevelIndex++;
+        this.gridManager.isGameOver = false;
+        this.curLevelwallCount = 0;
+        this.gridManager.clearAllGrid();
+        this.gridManager.inIt();
+        this.GameUI.InitTitle();
+    }
+
+    public setGameoverState(value) {
+        this.gridManager.isGameOver = value;
     }
 }
 
