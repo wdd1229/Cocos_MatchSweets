@@ -6,7 +6,7 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Tile')
 export class Tile extends Component {
-    @property({ type: GridType, displayName: `类型` })
+    //@property({ type: GridType, displayName: `类型` })
     public gridType: GridType = GridType.SpecialCollection;
     private gridManager: GridManager = null;
     private curAnim: Animation = null;

@@ -1,4 +1,4 @@
-﻿import { _decorator, Component, Node ,find, Prefab} from 'cc';
+﻿import { _decorator, Component, Node ,find, Prefab, Label} from 'cc';
 import { JsonManager, LevelConfig } from './JsonManager';
 import { PrefabManager } from './PrefabManager';
 import { GridManager } from './GridManager';
@@ -6,6 +6,7 @@ import { GridType } from './GridType';
 import { GameUI } from './UI/GameUI';
 import { MainUI } from './UI/MainUI';
 import { LoadingUI } from './UI/LoadingUI';
+import { RewardUI } from './UI/RewardUI';
 const { ccclass, property } = _decorator;
 
 
@@ -32,6 +33,7 @@ export default class GameManager extends Component {
     private LoadingUI: LoadingUI = null;
     private MainUI: MainUI = null;
     public GameUI: GameUI = null;
+    public RewardUI: RewardUI = null;
     @property
     private prefabManager: PrefabManager = null;
     @property
@@ -55,6 +57,7 @@ export default class GameManager extends Component {
         this.LoadingUI = this.Canvas.getChildByName("LoadingUI").getComponent(LoadingUI);
         this.MainUI = this.Canvas.getChildByName("MainUI").getComponent(MainUI);
         this.GameUI = this.Canvas.getChildByName("GameUI").getComponent(GameUI);
+        this.RewardUI = this.Canvas.getChildByName("RewardUI").getComponent(RewardUI);
 
         this.prefabManager = this.node.getChildByName("PrefabManager").getComponent(PrefabManager);
         this.gridManager = this.node.getChildByName("GridManager").getComponent(GridManager);
@@ -233,6 +236,7 @@ export default class GameManager extends Component {
     public clearAllGrid() {
         if (this.curLevelIndex+1 > this.jsonManager.GetLevelConfigLen()) {
             this.GameUI.node.active = false;
+            this.RewardUI.node.active = true;
             console.error("关卡结束了。。。");
             return;
         }
@@ -244,8 +248,23 @@ export default class GameManager extends Component {
         this.GameUI.InitTitle();
     }
 
+    public ResetGame() {
+        this.GameUI.node.active == true
+        this.curLevelIndex = 1;
+        this.curLevelwallCount = 0;
+        this.gridManager.isGameOver = false;
+        this.gridManager.clearAllGrid();
+        this.gridManager.inIt();
+        this.GameUI.InitTitle();
+    }
+
     public setGameoverState(value) {
         this.gridManager.isGameOver = value;
+    }
+
+    
+    public setRewardID(id: number) {
+        this.RewardUI.inIt(id);
     }
 }
 
