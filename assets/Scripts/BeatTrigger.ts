@@ -20,6 +20,8 @@ export class BeatTrigger extends Component {
 
     @property({ type: RewardUI, displayName:"RewardUI" })
     public rewardUI: RewardUI = null;
+
+
     onLoad() {
         // 赋予初始位置
         this.originalPosition = this.node.position.clone();

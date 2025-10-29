@@ -7,6 +7,8 @@ import { GameUI } from './UI/GameUI';
 import { MainUI } from './UI/MainUI';
 import { LoadingUI } from './UI/LoadingUI';
 import { RewardUI } from './UI/RewardUI';
+import { HelpUI } from './UI/HelpUI';
+import { SetUI } from './UI/SetUI';
 const { ccclass, property } = _decorator;
 
 
@@ -34,6 +36,8 @@ export default class GameManager extends Component {
     private MainUI: MainUI = null;
     public GameUI: GameUI = null;
     public RewardUI: RewardUI = null;
+    public HelpUI: HelpUI = null;
+    public SetUI:SetUI = null;
     @property
     private prefabManager: PrefabManager = null;
     @property
@@ -58,6 +62,8 @@ export default class GameManager extends Component {
         this.MainUI = this.Canvas.getChildByName("MainUI").getComponent(MainUI);
         this.GameUI = this.Canvas.getChildByName("GameUI").getComponent(GameUI);
         this.RewardUI = this.Canvas.getChildByName("RewardUI").getComponent(RewardUI);
+        this.HelpUI = this.Canvas.getChildByName("HelpUI").getComponent(HelpUI);
+        this.SetUI = this.Canvas.getChildByName("SetUI").getComponent(SetUI);
 
         this.prefabManager = this.node.getChildByName("PrefabManager").getComponent(PrefabManager);
         this.gridManager = this.node.getChildByName("GridManager").getComponent(GridManager);
@@ -104,7 +110,13 @@ export default class GameManager extends Component {
                 this.MainUI.node.active = false;
                  this.GameUI.node.active = true;
                  this.StartGame();
-                break;
+                 break;
+             case "HelpUI":
+                 this.HelpUI.node.active = true;
+                 break;
+             case "SetUI":
+                 this.SetUI.node.active = true;
+                 break;
         }
     }
 
@@ -266,6 +278,8 @@ export default class GameManager extends Component {
     public setRewardID(id: number) {
         this.RewardUI.inIt(id);
     }
+
+
 }
 
 

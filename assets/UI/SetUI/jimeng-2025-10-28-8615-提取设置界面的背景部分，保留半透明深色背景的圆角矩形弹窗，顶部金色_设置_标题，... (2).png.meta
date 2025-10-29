@@ -1,0 +1,134 @@
+{
+  "ver": "1.0.27",
+  "importer": "image",
+  "imported": true,
+  "uuid": "81551d09-39f8-4259-a042-9962326f5766",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "81551d09-39f8-4259-a042-9962326f5766@6c48a",
+      "displayName": "jimeng-2025-10-28-8615-提取设置界面的背景部分，保留半透明深色背景的圆角矩形弹窗，顶部金色_设置_标题，... (2)",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "81551d09-39f8-4259-a042-9962326f5766",
+        "visible": false
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "81551d09-39f8-4259-a042-9962326f5766@f9941",
+      "displayName": "jimeng-2025-10-28-8615-提取设置界面的背景部分，保留半透明深色背景的圆角矩形弹窗，顶部金色_设置_标题，... (2)",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 10,
+        "offsetY": -74,
+        "trimX": 265,
+        "trimY": 381,
+        "width": 130,
+        "height": 26,
+        "rawWidth": 640,
+        "rawHeight": 640,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [
+            -65,
+            -13,
+            0,
+            65,
+            -13,
+            0,
+            -65,
+            13,
+            0,
+            65,
+            13,
+            0
+          ],
+          "indexes": [
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+          ],
+          "uv": [
+            265,
+            259,
+            395,
+            259,
+            265,
+            233,
+            395,
+            233
+          ],
+          "nuv": [
+            0.4140625,
+            0.3640625,
+            0.6171875,
+            0.3640625,
+            0.4140625,
+            0.4046875,
+            0.6171875,
+            0.4046875
+          ],
+          "minPos": [
+            -65,
+            -13,
+            0
+          ],
+          "maxPos": [
+            65,
+            13,
+            0
+          ]
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "81551d09-39f8-4259-a042-9962326f5766@6c48a",
+        "atlasUuid": "",
+        "trimType": "auto"
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "sprite-frame",
+    "hasAlpha": true,
+    "fixAlphaTransparencyArtifacts": false,
+    "redirect": "81551d09-39f8-4259-a042-9962326f5766@6c48a"
+  }
+}

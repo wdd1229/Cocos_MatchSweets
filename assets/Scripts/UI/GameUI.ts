@@ -28,6 +28,14 @@ export class GameUI extends Component {
     @property({ type: Button, displayName: `下一关按钮` })
     private nextlevelBtn: Button = null;
 
+
+    @property({ type: Button, displayName: `设置按钮` })
+    private setBtn: Button = null;
+    @property({ type: Button, displayName: `帮助按钮` })
+    private helpBtn: Button = null;
+    @property({ type: Button, displayName: `退出按钮` })
+    private exitBtn: Button = null;
+
     private numbers = [1, 2, 3];
     private chineseNumbers = this.numbers.map(num => {
         const cnMap = {
@@ -45,7 +53,16 @@ export class GameUI extends Component {
         this.explodeBtn.node.on(Button.EventType.CLICK, this.StartExplode, this);
         this.aiBtn.node.on(Button.EventType.CLICK, this.ChangeAiState, this);
         this.nextlevelBtn.node.on(Button.EventType.CLICK, this.Nextlevel, this);
+        //设置按钮
+        this.setBtn.node.on(Button.EventType.CLICK, () => { GameManager.Instance.OpenUI("SetUI") }, this);
+
+        //帮助按钮
+        this.helpBtn.node.on(Button.EventType.CLICK, () => { GameManager.Instance.OpenUI("HelpUI") }, this);
+
+        //退出按钮
+        this.exitBtn.node.on(Button.EventType.CLICK, () => { GameManager.Instance.OpenUI("ExitUI") }, this);
     }
+
     start() {
         this.aiStatelabel.string = "开始托管";
         this.InitTitle();
