@@ -9,6 +9,7 @@ import { LoadingUI } from './UI/LoadingUI';
 import { RewardUI } from './UI/RewardUI';
 import { HelpUI } from './UI/HelpUI';
 import { SetUI } from './UI/SetUI';
+import { ExitUI } from './UI/ExitUI';
 const { ccclass, property } = _decorator;
 
 
@@ -37,7 +38,8 @@ export default class GameManager extends Component {
     public GameUI: GameUI = null;
     public RewardUI: RewardUI = null;
     public HelpUI: HelpUI = null;
-    public SetUI:SetUI = null;
+    public SetUI: SetUI = null;
+    public ExitUI: ExitUI = null;
     @property
     private prefabManager: PrefabManager = null;
     @property
@@ -64,6 +66,7 @@ export default class GameManager extends Component {
         this.RewardUI = this.Canvas.getChildByName("RewardUI").getComponent(RewardUI);
         this.HelpUI = this.Canvas.getChildByName("HelpUI").getComponent(HelpUI);
         this.SetUI = this.Canvas.getChildByName("SetUI").getComponent(SetUI);
+        this.ExitUI = this.Canvas.getChildByName("ExitUI").getComponent(ExitUI);
 
         this.prefabManager = this.node.getChildByName("PrefabManager").getComponent(PrefabManager);
         this.gridManager = this.node.getChildByName("GridManager").getComponent(GridManager);
@@ -116,6 +119,9 @@ export default class GameManager extends Component {
                  break;
              case "SetUI":
                  this.SetUI.node.active = true;
+                 break;
+             case "ExitUI":
+                 this.ExitUI.node.active = true;
                  break;
         }
     }

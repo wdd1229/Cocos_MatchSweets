@@ -181,7 +181,7 @@ export class GridManager extends Component {
             return null;
         }
         //node.name = "New"+index.toString();
-        node.getComponent(UITransform).setContentSize(this.cellSize, this.cellSize);
+        //node.getComponent(UITransform).setContentSize(this.cellSize, this.cellSize);
 
         const targetPos = this.getScreenPosByIndex(index);
         node.position = new Vec3(targetPos.x, this.lastRowHeight, 0);
@@ -262,7 +262,7 @@ export class GridManager extends Component {
         if (isSpecial) {
             return GridType.SpecialCollection;
         } else {
-            return Math.floor(Math.random() * 5)+1;
+            return Math.floor(Math.random() * 15)+1;
         }
     }
     private visited: boolean[] = [];
@@ -574,7 +574,7 @@ export class GridManager extends Component {
             return null;
         }
         node.name = index.toString();
-        node.getComponent(UITransform).setContentSize(this.cellSize, this.cellSize);
+        //node.getComponent(UITransform).setContentSize(this.cellSize, this.cellSize);
         //console.error("新创建的格子index：" + index + "  行： " + row + " 列 ：" + col+"  name:"+node.name);
         const targetPos = this.getScreenPosByIndex(index);
         node.position = new Vec3(targetPos.x, this.lastRowHeight, 0);
