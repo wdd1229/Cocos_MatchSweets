@@ -16,6 +16,9 @@ export class MainUI extends Component {
 
     startGame(button: Button) {
         console.log("click startGameBtn ...");
+
+        GameManager.Instance.onShare();
+
         GameManager.Instance.OpenUI("GameUI");
     }
 

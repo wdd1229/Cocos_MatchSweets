@@ -176,6 +176,11 @@ export class GridManager extends Component {
     private async spawnGridAtPositionAsync(index: number, row: number, col: number,isSpeacial: boolean): Promise<Node | null> {
         const gridType = this.getRandomGridType(isSpeacial);
         const node = GameManager.Instance.getGridPrefab(gridType);
+        if (gridType == GridType.SpecialCollection) {
+            node.scale = new Vec3(1, 1, 1);
+        } else {
+            node.scale = new Vec3(0.1,0.1, 1);
+        }
         if (!node) {
             console.error("无法生成格子，GridPrefab 未加载!");
             return null;
@@ -262,7 +267,7 @@ export class GridManager extends Component {
         if (isSpecial) {
             return GridType.SpecialCollection;
         } else {
-            return Math.floor(Math.random() * 15)+1;
+            return Math.floor(Math.random() *( 5 * GameManager.Instance.getCurLevelIndex()))+1;
         }
     }
     private visited: boolean[] = [];
@@ -573,7 +578,12 @@ export class GridManager extends Component {
             console.error("无法生成格子，GridPrefab 未加载!");
             return null;
         }
-        node.name = index.toString();
+        if (gridType == GridType.SpecialCollection) {
+            node.scale = new Vec3(1, 1, 1);
+        } else {
+            node.scale = new Vec3(0.1, 0.1, 1);
+        }
+        //node.name = index.toString();
         //node.getComponent(UITransform).setContentSize(this.cellSize, this.cellSize);
         //console.error("新创建的格子index：" + index + "  行： " + row + " 列 ：" + col+"  name:"+node.name);
         const targetPos = this.getScreenPosByIndex(index);

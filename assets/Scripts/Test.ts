@@ -1,6 +1,7 @@
 ﻿import { _decorator, Component,resources,Prefab,Animation, error, AnimationClip, AnimationState, tween, Button, Sprite, color, Color, SpriteFrame, Vec2, randomRange, Vec3, PageView } from 'cc';
 import { Tile } from './Tile';
 import { GridType } from './GridType';
+import { debug } from 'console';
 const { ccclass, property } = _decorator;
 
 @ccclass('Test')
@@ -21,7 +22,20 @@ export class Test extends Component {
     @property({ type: PageView, tooltip: `PageView` })
     public pageViewNode: PageView = null;
     onLoad() {
-
+        //tt.onShow((res) => {
+        //    //判断用户是否是从侧边栏进来的
+        //    this.isFromSidebar = (res.launch_from == 'homepage' && res.location == 'sidebar_card')
+        //    if (this.isFromSidebar) {
+        //        //如果是从侧边栏进来的，显示“领取奖励”按钮，隐藏“去侧边栏”
+        //        this.btnGetAward.node.active = true
+        //        this.btnGotoSidebar.node.active = false
+        //    }
+        //    else {
+        //        //否则反之
+        //        this.btnGetAward.node.active = false
+        //        this.btnGotoSidebar.node.active = true
+        //    }
+        //});
     }
 
     curState:AnimationClip
@@ -32,7 +46,7 @@ export class Test extends Component {
         this.testbtn.node.on(Button.EventType.CLICK, this.callback, this);
         this.testbtn2.node.on(Button.EventType.CLICK, this.callback2, this);
 
-
+        error("Test start ");
         // 假设 pageView 是你的 PageView 组件
         let pageView = this.pageViewNode;  // pageViewNode 是 PageView 组件所在的节点
 

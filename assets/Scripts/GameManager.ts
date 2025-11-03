@@ -10,6 +10,7 @@ import { RewardUI } from './UI/RewardUI';
 import { HelpUI } from './UI/HelpUI';
 import { SetUI } from './UI/SetUI';
 import { ExitUI } from './UI/ExitUI';
+import { DouyinAPI } from './DouyinAPI';
 const { ccclass, property } = _decorator;
 
 
@@ -74,10 +75,47 @@ export default class GameManager extends Component {
     }
 
     start() {
+        // 检查环境
+        console.log('是否在抖音小游戏环境:', DouyinAPI.isInDouyinGame());
+
+        // 显示提示
+        this.showHello();
+
+
         this.LoadingUI.node.active = true;
         this.MainUI.node.active = false;
         this.GameUI.node.active = false;
     }
+    showHello() {
+        DouyinAPI.show({
+            title: '欢迎',
+            content: '欢迎使用这款小游戏',
+            success: () => {
+                console.log('提示框显示成功');
+                // 可以在这里触发其他操作
+            },
+            fail: (err) => {
+                console.error('提示框显示失败', err);
+            }
+        });
+    }
+    // 分享功能
+    onShare() {
+        DouyinAPI.share({
+            channel: 'menu',
+            title: '快来玩这个游戏！',
+            content: '我在抖音上发现了一个有趣的小游戏',
+            query: 'from=share',
+            success: () => {
+                console.log('分享成功');
+            },
+            fail: (err) => {
+                console.error('分享失败', err);
+            }
+        });
+    }
+
+
     /**打开对应UI
      * @param uiname
      * @returns
@@ -116,12 +154,18 @@ export default class GameManager extends Component {
                  break;
              case "HelpUI":
                  this.HelpUI.node.active = true;
+                 this.SetUI.node.active = false;
+                 this.ExitUI.node.active = false;
                  break;
              case "SetUI":
                  this.SetUI.node.active = true;
+                 this.HelpUI.node.active = false;
+                 this.ExitUI.node.active = false;
                  break;
              case "ExitUI":
                  this.ExitUI.node.active = true;
+                 this.SetUI.node.active = false;
+                 this.HelpUI.node.active = false;
                  break;
         }
     }
